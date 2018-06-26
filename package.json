@@ -1,7 +1,6 @@
 {
   "name": "maps",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,5 +24,6 @@
     "moment": "^2.22.2",
     "node-sass-middleware": "^0.11.0",
     "sass": "^1.7.1"
-  }
+  },
+  "description": ""
 }
