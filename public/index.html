@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tweeter - Home Page</title>
+    <!-- Compiled Sass -->
+    <link rel="stylesheet" href="main.css" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
+    <script src="/vendor/moment.js"></script>
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+  </head>
+  <body>
+    <!-- Top nav bar (fixed) -->
+    <nav id="nav-bar">
+      <img class="logo" src="/images/bird.png">
+      <div class="non-logo-nav">
+        <span class="header">Tweeter</span>
+        <button class="compose-btn">
+          <i class="far fa-edit"></i>
+          Tweet
+        </button>
+      </div>
+    </nav>
+    <!-- MAIN -->
+    <main class="container">
+      <!-- Error report area -->
+      <section class="input-errors"></section>
+      <!-- Post New Tweet -->
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2><p></p>
+        <!-- <hr id="divider"> (Part of project requirements, but looks ugly)-->
+        <form id="new-tweet" action="/tweets" method="post">
+          <textarea id="user-input" name="text" placeholder="What are you humming about?" maxlength="140"></textarea>
+          <input id="submitNewTweet" type="submit" value="Tweet">
+          <span class="counter">140</span>
+        </form>
+      </section>
+      <!-- Twitter feed -->
+      <section class="tweet-feed">
+      <!-- Twitter Feed -->
+      </section>
+    </main>
+  </body>
+</html>
