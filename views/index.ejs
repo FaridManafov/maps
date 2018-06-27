@@ -26,31 +26,10 @@
 
     <h3>Google Maps Demo</h3>
     <div id="map" style="height: 400px; width: 100%;"></div>
-    <script>
-      var map;
-      var toronto = {lat: 43.6532, lng: -79.3832};
 
-      function initMap() {
-        map = new google.maps.Map(
-          document.getElementById('map'), {
-            zoom: 4,
-            center: toronto
-        });
+    <script>placeMarker(toronto);</script>
+    <!-- map dissapears when line above is removed -->
 
-
-      function placeMarker(location) {
-        marker = new google.maps.Marker({
-          position: location,
-          map: map,
-          title: 'The 6ix',
-          draggable: true
-        });
-      }
-
-      placeMarker(toronto);
-      }
-
-    </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBISs3cUVbTHTGwQ380hxOT9J4E-GTMUJU&callback=initMap"
   ></script>
 

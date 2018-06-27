@@ -4,7 +4,7 @@ var map;
       function initMap() {
         map = new google.maps.Map(
           document.getElementById('map'), {
-            zoom: 4,
+            zoom: 14,
             center: toronto
         });
 
