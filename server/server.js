@@ -1,8 +1,10 @@
 const express = require('express');
 const PORT = 3000;
 const path = require('path');
+const bodyParser = require("body-parser");
 const nodeSassMiddleware = require('node-sass-middleware');
 const app = express();
+
 // const settings = require('./knexfile.js')
 // const knex = require('knex')(settings.development);
 
@@ -15,6 +17,8 @@ app.use(nodeSassMiddleware({
   outputStyle: 'compressed'
 }));
 
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 /* Routes */
@@ -25,6 +29,16 @@ app.get("/", (req, res) => {
 
 app.get("/new", (req, res) => {
   res.render("new_map");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.post("/register", (req, res) => {
+  console.log('REQ.BODY.USEREMAIL:', req.body.useremail);
+  console.log('REQ.BODY.USERPASSWORD:', req.body.userpassword);
+  res.redirect("/");
 });
 
 /* Start */
