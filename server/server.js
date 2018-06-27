@@ -23,6 +23,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/new", (req, res) => {
+  res.render("new_map");
+});
+
 /* Start */
 
 app.listen(PORT, () => {
