@@ -19,13 +19,16 @@
   "homepage": "https://github.com/jonathandannel/maps#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.1",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "jquery": "^3.3.1",
     "knex": "^0.14.6",
     "moment": "^2.22.2",
     "node-sass-middleware": "^0.11.0",
     "nodemon": "^1.17.5",
     "pg": "^7.4.3",
+    "popper.js": "^1.14.3",
     "sass": "^1.7.1"
   },
   "description": ""
