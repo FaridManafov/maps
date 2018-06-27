@@ -12,7 +12,7 @@ function initMap() {
     marker = new google.maps.Marker({
       position: location,
       map: map,
-      title: 'The 6ix',
+      title: 'Toronto',
       draggable: true
     });
   }
