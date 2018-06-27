@@ -3,6 +3,8 @@ const PORT = 3000;
 const path = require('path');
 const nodeSassMiddleware = require('node-sass-middleware');
 const app = express();
+// const settings = require('./knexfile.js')
+// const knex = require('knex')(settings.development);
 
 app.set("view engine", "ejs");
 
