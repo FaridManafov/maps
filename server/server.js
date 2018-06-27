@@ -5,8 +5,9 @@ const bodyParser = require("body-parser");
 const nodeSassMiddleware = require('node-sass-middleware');
 const app = express();
 
-// const settings = require('./knexfile.js')
-// const knex = require('knex')(settings.development);
+/* Database Config */
+const knexConfig = require('./knexfile.js')
+const knex = require('knex')(knexConfig.development);
 
 app.set("view engine", "ejs");
 
@@ -18,7 +19,6 @@ app.use(nodeSassMiddleware({
 }));
 
 app.use(bodyParser.urlencoded({extended: true}));
-
 app.use(express.static(path.join(__dirname, '../public')));
 
 /* Routes */
