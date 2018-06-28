@@ -1,3 +1,6 @@
+const knexConfig = require('../../server/knexfile.js')
+const knex = require('knex')(knexConfig.development);
+
 var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
@@ -7,6 +10,7 @@ var infowindow;
 var messagewindow;
 
 function initMap() {
+  console.log('knex', knex)
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
     center: {lat: 40.731, lng: -73.997}
@@ -63,9 +67,6 @@ function saveData() {
 
 //reverse geocoding
 function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
-  // var input = document.getElementById('latlng').value;
-  // var latlngStr = input.split(',', 2);
-  // var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
   var location = {lat: lat, lng: lng}
   geocoder.geocode({'location': location}, function(results, status) {
     if (status === 'OK') {
