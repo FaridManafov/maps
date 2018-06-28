@@ -1,15 +1,20 @@
 <% include ./partials/header %>
+
 <h1 align="center">Create A New Map</h1>
 
-<!-- Creating a new map with one draggable pin that defaults to showing Toronto. -->
-<div id="map">
-  <script>initMap()</script>
-</div>
+<container class="mapAndMapInfo">
 
-<!-- List of markers that user has created on this map. -->
-<div class="listOfMarkers">
-  <h2>My Locations</h2>
-</div>
+  <!-- Creating a new map with one draggable pin that defaults to showing Toronto. -->
+  <div id="map">
+    <script>initMap()</script>
+  </div>
+
+  <!-- List of markers that user has created on this map. -->
+  <div class="listOfMarkers">
+    <h2>My Locations</h2>
+  </div>
+
+</container>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBISs3cUVbTHTGwQ380hxOT9J4E-GTMUJU&callback=initMap"></script>
 
