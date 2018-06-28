@@ -1,19 +1,18 @@
-const knexConfig = require('../../server/knexfile.js')
-const knex = require('knex')(knexConfig.development);
+// const knexConfig = require('../../server/knexfile.js')
+// const knex = require('knex')(knexConfig.development);
 
 var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
-var toronto = {lat: 43.6446, lng: -79.3950};
 var marker;
 var infowindow;
 var messagewindow;
 
 function initMap() {
-  console.log('knex', knex)
+  // console.log('knex', knex)
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: 40.731, lng: -73.997}
+    zoom: 14,
+    center: {lat: 43.6446, lng: -79.3950}
   });
   var geocoder = new google.maps.Geocoder;
   var infowindow = new google.maps.InfoWindow;
@@ -25,6 +24,7 @@ function initMap() {
       map: map
     });
 
+    //FETCH lat lng from click
     var markerLat = marker.getPosition().lat();
     var markerLng = marker.getPosition().lng();
 
@@ -71,7 +71,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
   geocoder.geocode({'location': location}, function(results, status) {
     if (status === 'OK') {
       if (results[0]) {
-        map.setZoom(11);
+        
         var marker = new google.maps.Marker({
           position: location,
           map: map
