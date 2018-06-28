@@ -7,7 +7,7 @@ var labelIndex = 0;
 var marker;
 var infowindow;
 var messagewindow;
-
+let addresses = []
 function initMap() {
   // console.log('knex', knex)
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -81,6 +81,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
         var address = results[0].formatted_address;
         infowindow.setContent(address);
         console.log(address); 
+        //Jquery into the html
         $('#result-address').text(address)
 
         infowindow.open(map, marker);
