@@ -2,8 +2,13 @@ var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
 
+      //this is what marker info we should pull from the database, just the lat: latitudeDB and lng:LongitudeDB,
+      //the information of the location will be fetched by reverse geocoding
       var toronto = {lat: 43.6532, lng: -79.3832};
 
+      //this initializes the map, the only thing to remember is zoom and centre,
+      //zoom zooms closer to the map the higher the number, 14 is a good num
+      //centre is where the map will be centered
       function initMap() {
         map = new google.maps.Map(
           document.getElementById('map'), {
@@ -11,6 +16,7 @@ var labelIndex = 0;
             center: toronto,
         });
 
+        //this places the marker on the location that is entered, you can run this multiple times for different places
       function placeMarker(location) {
         marker = new google.maps.Marker({
           position: location,
@@ -58,11 +64,6 @@ var labelIndex = 0;
 
       }
 
-
-
-
-
-
-
+      
       placeMarker(toronto);
       }
