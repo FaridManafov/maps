@@ -27,13 +27,13 @@ var labelIndex = 0;
           label: labels[labelIndex++ % labels.length]
         });
 
-      // on click listener pin which shows information of the pin
+      // on click listener pin which shows information of the pin above it
       marker.addListener('click', function() {
         infowindow.open(map, marker);
       });
 
       //lines below is the info for when you press the pin, place this into the database for when the user inputs
-        //information into a new pin
+      //information into the new pin
 
         var contentString = '<div id="content">'+
         '<div id="siteNotice">'+
@@ -57,7 +57,8 @@ var labelIndex = 0;
         '</div>';
 
 
-
+        //this initializes the window when the click listener is activated on the ping, which pulls up content above,
+        //decide if we need info boxes or not
         var infowindow = new google.maps.InfoWindow({
           content: contentString
         });
