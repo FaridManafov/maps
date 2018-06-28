@@ -11,7 +11,7 @@ function initMap() {
   var geocoder = new google.maps.Geocoder;
   var infowindow = new google.maps.InfoWindow;
 
-  geocodeLatLng(geocoder, map, infowindow);j
+  geocodeLatLng(geocoder, map, infowindow);
 }
 
 function geocodeLatLng(geocoder, map, infowindow) {
@@ -27,7 +27,12 @@ function geocodeLatLng(geocoder, map, infowindow) {
           map: map
         });
         //here is where the info is relayed in formatted address style
-        infowindow.setContent(results[0].formatted_address);
+        
+        var address = results[0].formatted_address;
+        infowindow.setContent(address);
+        console.log(address);
+        $('#result-address').text(address)
+
         infowindow.open(map, marker);
       } else {
         window.alert('No results found');
