@@ -41,6 +41,7 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
+//Once we have map id's to test with, this route will change to "/maps/"
 app.get("/maps/id", (req, res) => {
   res.render("display_map");
 });

@@ -1,6 +1,6 @@
 <% include ./partials/header %>
 
-<h1 align="center">User's Map</h1>
+<h1 class="leftAlignedHeading">User's Map</h1>
 
 <container class="mapAndMapInfo">
 
@@ -10,9 +10,18 @@
   <!-- List of markers that user has created on this map. -->
   <div class="listOfMarkers">
     <h2>Locations</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item list-group-item-action">Cras justo odio</li>
+      <li class="list-group-item list-group-item-action"></li>
+      <li class="list-group-item list-group-item-action"></li>
+      <li class="list-group-item list-group-item-action"></li>
+      <li class="list-group-item list-group-item-action"></li>
+  </ul>
   </div>
 
 </container>
 
 <% include ./partials/footer %>
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initMap">
+</script>
