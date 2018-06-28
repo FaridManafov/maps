@@ -50,8 +50,8 @@ var labelIndex = 0;
         '</div>'+
         '</div>';
 
-        
-  
+
+
         var infowindow = new google.maps.InfoWindow({
           content: contentString
         });
