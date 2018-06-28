@@ -3,10 +3,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('users', function(table) {
       table.increments('id').primary();
       table.string('username');
-      table.string('email');
       table.string('password');
-      table.integer('maps_created');
-      table.integer('maps_contributing');
     })
   ])
 };
