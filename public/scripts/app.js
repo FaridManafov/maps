@@ -14,19 +14,65 @@ function initMap() {
   var geocoder = new google.maps.Geocoder;
   var infowindow = new google.maps.InfoWindow;
 
-  geocodeLatLng(geocoder, map, infowindow);
+  //click listener to make a new marker
+  google.maps.event.addListener(map, "click", function(event) {
+    marker = new google.maps.Marker({
+      position: event.latLng,
+      map: map
+    });
+
+    var markerLat = marker.getPosition().lat();
+    var markerLng = marker.getPosition().lng();
+
+    geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
+    
+      //click listener on the marker that opens a window info on the marker
+    google.maps.event.addListener(marker, "click", function() {
+      infowindow.open(map, marker);
+    });
+  });
+
+
+
+  //callback
+  // geocodeLatLng(geocoder, map, infowindow);
+  //TEST
+  //   document.getElementById('submit').addEventListener('click', function() {
+  //   geocodeLatLng(geocoder, map, infowindow);
+  // });
 }
 
-function geocodeLatLng(geocoder, map, infowindow) {
+//saves the marker information
+function saveData() {
+  var name = escape(document.getElementById("name").value);
+  var address = escape(document.getElementByIdtoronto("address").value);
+  var type = document.getElementById("type").value;
+  var latlng = marker.getPosition();
+  var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address +
+            "&type=" + type + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
+
+  downloadUrl(url, function(data, responseCode) {
+
+    if (responseCode == 200 && data.length <= 1) {
+      infowindow.close();
+      messagewindow.open(map, marker);
+    }
+  });
+}
+
+
+//reverse geocoding
+function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
   // var input = document.getElementById('latlng').value;
   // var latlngStr = input.split(',', 2);
   // var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-  geocoder.geocode({'location': toronto}, function(results, status) {
+  var location = {lat: lat, lng: lng}
+  geocoder.geocode({'location': location}, function(results, status) {
     if (status === 'OK') {
       if (results[0]) {
         map.setZoom(11);
         var marker = new google.maps.Marker({
-          position: toronto,
+          position: location,
           map: map
         });
         //here is where the info is relayed in formatted address style
@@ -45,6 +91,7 @@ function geocodeLatLng(geocoder, map, infowindow) {
     }
   });
 }
+
 
       // //this is what marker info we should pull from the database, just the lat: latitudeDB and lng:LongitudeDB,
       // //the information of the location will be fetched by reverse geocoding
@@ -118,7 +165,8 @@ function geocodeLatLng(geocoder, map, infowindow) {
       //         map.setCenter(results[0].geometry.location);
       //         var marker = new google.maps.Marker({
       //           map: map,
-      //           position: results[0].geometry.location
+      //           position: results[0].geometry.location  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initMap"></script> -->
+
       //         });
       //         infowindow.setContent(results[0].formatted_address);
       //         infowindow.open(map, marker);
