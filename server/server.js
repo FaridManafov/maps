@@ -36,7 +36,7 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  console.log('REQ.BODY.USEREMAIL:', req.body.useremail);
+  console.log('REQ.BODY.USERNAME:', req.body.username);
   console.log('REQ.BODY.USERPASSWORD:', req.body.userpassword);
   res.redirect("/");
 });
