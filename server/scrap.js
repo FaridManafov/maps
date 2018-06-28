@@ -1,17 +1,12 @@
-exports.up = function(knex, Promise) {
-  return Promise.all([
-    knex.schema.createTable('maps', function(table) {
-      table.increments('id').primary();
-      table.string('name');
-      table.string('created_by');
-      table.integer('favorited_by');
-      table.integer('contributors');
-    })
-  ])
-};
-
-exports.down = function(knex, Promise) {
-  return Promise.all([
-    knex.schema.dropTable('maps')
-  ])
-};
+knex('users')
+  .where({ username: username })
+  .then((data) => {
+    if (data.length <= 0) {
+      res.redirect("/register");
+      return;
+    } else {
+      if (bcrypt.compareSync(req.body.userpassword, data[0].password)) {
+        knex('user')
+      }
+    }
+  });

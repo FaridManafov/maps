@@ -28,7 +28,7 @@ $(document).ready(function() {
       errors.push('Password must not contain any special characters');
     }
 
-    if (username.length < 5) {
+    if (username.length < 2) {
       errors.push('Username must be at least 5 characters');
     } else if (username.length > 10) {
       errors.push('Username must not be longer than 10 characters');

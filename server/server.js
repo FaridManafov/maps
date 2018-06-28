@@ -1,7 +1,9 @@
 const express = require('express');
 const PORT = 3000;
 const path = require('path');
-const bodyParser = require("body-parser");
+const bcrypt = require('bcrypt-nodejs')
+const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 const nodeSassMiddleware = require('node-sass-middleware');
 const app = express();
 
@@ -21,6 +23,11 @@ app.use(nodeSassMiddleware({
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['user_id']
+}));
+
 /* Routes */
 
 app.get("/", (req, res) => {
@@ -38,12 +45,17 @@ app.get("/register", (req, res) => {
 app.post("/register", (req, res) => {
   console.log('REQ.BODY.USERNAME:', req.body.username);
   console.log('REQ.BODY.USERPASSWORD:', req.body.userpassword);
-  res.redirect("/");
-});
+  let salt = bcrypt.genSaltSync(10);
+  let username = req.body.username;
+  let password = bcrypt.hashSync(req.body.userpassword, salt);
+  console.log(username, password)
 
-//Once we have map id's to test with, this route will change to "/maps/"
-app.get("/maps/id", (req, res) => {
-  res.render("display_map");
+  knex('users')
+    .where({ username: username, password: password })
+    .then((data) => {
+      console.log(data);
+      res.redirect("/");
+    });
 });
 
 /* Start */
