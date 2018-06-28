@@ -41,6 +41,10 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
+app.get("/maps/id", (req, res) => {
+  res.render("display_map");
+});
+
 /* Start */
 
 app.listen(PORT, () => {
