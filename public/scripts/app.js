@@ -2,6 +2,9 @@ var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
 var toronto = {lat: 43.6446, lng: -79.3950};
+var marker;
+var infowindow;
+var messagewindow;
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -27,10 +30,10 @@ function geocodeLatLng(geocoder, map, infowindow) {
           map: map
         });
         //here is where the info is relayed in formatted address style
-        
+
         var address = results[0].formatted_address;
         infowindow.setContent(address);
-        console.log(address);
+        console.log(address); 
         $('#result-address').text(address)
 
         infowindow.open(map, marker);
