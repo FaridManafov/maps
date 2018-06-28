@@ -1,4 +1,4 @@
-<% include ./partials/header %>
+<%- include ./partials/header %>
 
 <div class="jumbotron">
   <h1 class="display-3">The world is your oyster.</h1>
@@ -28,25 +28,11 @@
     <div id="map" style="height: 800px; width: 60%;"></div>
     <!-- <div id="map" style="height: 400px; width: 100%;"></div> -->
 
+    
 
-    <script>placeMarker(toronto);</script>
-    <!-- map dissapears when line above is removed -->4
-    <!-- For some reason theres an error when above is removed -->
-
-      function placeMarker(location) {
-        marker = new google.maps.Marker({
-          position: location,
-          map: map,
-          title: 'The 6ix',
-          draggable: true
-        });
-      }
-
-      placeMarker(toronto);
-      }
-
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBISs3cUVbTHTGwQ380hxOT9J4E-GTMUJU&callback=initMap"
+<%- include ./partials/footer %>
+<!-- MAKE SURE THE API IS BELOW THE FOOTER, OR ASYNC PROBLEMS MAKE IT NOT LOAD SOMETIMES -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBISs3cUVbTHTGwQ380hxOT9J4E-GTMUJU&callback=initMap"
   ></script>
-
-<% include ./partials/footer %>
+</body>
+</html>
