@@ -30,41 +30,33 @@ app.use(cookieSession({
 
 /* Routes */
 app.get("/", (req, res) => {
-  let templateVars = {
-    user: {
-       userName: req.session.username,
-       loggedIn: req.session.logged_in
-    }
+  let templateVars = { user:
+     { userName: req.session.username,
+       loggedIn: req.session.logged_in }
   };
   res.render("index", templateVars);
 });
 
 app.get("/404", (req, res) => {
-  let templateVars = {
-     user: {
-       userName: req.session.username,
-       loggedIn: req.session.logged_in
-     }
+  let templateVars = { user:
+     { userName: req.session.username,
+       loggedIn: req.session.logged_in }
   };
   res.render("error", templateVars)
 });
 
 app.get("/new", (req, res) => {
-  let templateVars = {
-     user: {
-       userName: req.session.username,
-       loggedIn: req.session.logged_in
-     }
+  let templateVars = { user:
+     { userName: req.session.username,
+       loggedIn: req.session.logged_in }
   };
   res.render("new_map", templateVars);
 });
 
 app.get("/register", (req, res) => {
-  let templateVars = {
-    user: {
-       userName: req.session.username,
-       loggedIn: req.session.logged_in
-    }
+  let templateVars = { user:
+     { userName: req.session.username,
+       loggedIn: req.session.logged_in }
   };
   res.render("register", templateVars);
 });
@@ -92,11 +84,9 @@ app.post("/register", (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  let templateVars = {
-    user: {
-       userName: req.session.username,
-       loggedIn: req.session.logged_in
-    }
+  let templateVars = { user:
+     { userName: req.session.username,
+       loggedIn: req.session.logged_in }
   };
   res.render('login', templateVars);
 })
@@ -108,7 +98,7 @@ app.post('/login', (req, res) => {
   knex('users')
   .where({ username: username })
   .then((data) => {
-    console.log(data);
+    console.log(data[0]);
     if (data.length <= 0) {
       res.redirect("/register");
       return;
@@ -145,14 +135,11 @@ app.post('/maps', (req, res) => {
   let user = req.session.user_id;
 
   knex('maps')
-  .insert({
-    mapname: mapName,
-    created_by: user
-  })
+  .insert({ mapname: mapName, created_by: user  })
   .returning('id')
   .then((id) => {
     res.json({
-      id: id
+      id: id[0]
     })
   })
 })
@@ -166,19 +153,18 @@ app.get('/maps/:id', (req, res) => {
     knex('markers')
     .where({ map_id: map.id })
     .then((markers) => {
-      let templateVars = {
-         user: {
-             userName: req.session.username,
-             loggedIn: req.session.logged_in
-         },
-         map: {
-           name: map.mapname,
-           id: map.id,
-           createdBy: map.created_by,
-           markers: markers
-         }
-      }
+      let templateVars =
+      { user:
+           { userName: req.session.username,
+             loggedIn: req.session.logged_in },
 
+        map: {
+          name: map.mapname,
+          id: map.id,
+          createdBy: map.created_by,
+          markers: markers
+        }
+      }
       res.render('display_map', templateVars);
     })
   })
@@ -192,15 +178,16 @@ app.get('/maps/:id', (req, res) => {
 
 
 app.post('/markers', (req, res) => {
+  console.log(req.body);
   let map = req.body.mapId;
   let lat = req.body.markerLat;
-  let long = req.body.markerLong;
+  let long = req.body.markerLng;
 
   knex('markers')
   .insert({ map_id: map, latitude: lat, longitude: long })
   .then((marker) => {
     console.log(marker)
-    res.redirect('/maps/:map') //is this necessary?
+    res.sendStatus(200)
   })
 })
 
