@@ -28,10 +28,7 @@ app.use(cookieSession({
   keys: ['user_id', 'logged_in', 'name']
 }));
 
-
-
 /* Routes */
-
 app.get("/", (req, res) => {
   let templateVars = { user:
      { userName: req.session.user_id,
@@ -42,24 +39,24 @@ app.get("/", (req, res) => {
 
 app.get("/404", (req, res) => {
   let templateVars = { user:
-     { userName: [req.session.user_id],
-       loggedIn: [req.session.logged_in] }
+     { userName: req.session.user_id,
+       loggedIn: req.session.logged_in }
   };
   res.render("error", templateVars)
 });
 
 app.get("/new", (req, res) => {
   let templateVars = { user:
-     { userName: [req.session.user_id],
-       loggedIn: [req.session.logged_in] }
+     { userName: req.session.user_id,
+       loggedIn: req.session.logged_in }
   };
   res.render("new_map", templateVars);
 });
 
 app.get("/register", (req, res) => {
   let templateVars = { user:
-     { userName: [req.session.user_id],
-       loggedIn: [req.session.logged_in] }
+     { userName: req.session.user_id,
+       loggedIn: req.session.logged_in }
   };
   res.render("register", templateVars);
 });
@@ -86,8 +83,8 @@ app.post("/register", (req, res) => {
 
 app.get('/login', (req, res) => {
   let templateVars = { user:
-     { userName: [req.session.user_id],
-       loggedIn: [req.session.logged_in] }
+     { userName: req.session.user_id,
+       loggedIn: req.session.logged_in }
   };
   res.render('login', templateVars);
 })
