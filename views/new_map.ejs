@@ -10,21 +10,16 @@
   <!-- List of markers that user has created on this map. -->
   <div class="listOfMarkers">
     <h2>My Locations</h2>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item list-group-item-action">Marker info will go here.</li>
-        <li class="list-group-item list-group-item-action"></li>
-        <li class="list-group-item list-group-item-action"></li>
-        <li class="list-group-item list-group-item-action"></li>
-        <li class="list-group-item list-group-item-action"></li>
-      </ul>
+    <ul id="newMapMarkers" class="list-group"></ul>
   </div>
 
 </container>
+
+<button id="addMarker">Add Marker</button>
 
 <% include ./partials/footer %>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initMap">
 </script>
-
 </body>
 </html>

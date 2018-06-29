@@ -33,7 +33,7 @@ function geocodeLatLng(geocoder, map, infowindow) {
 
         var address = results[0].formatted_address;
         infowindow.setContent(address);
-        console.log(address); 
+        console.log(address);
         $('#result-address').text(address)
 
         infowindow.open(map, marker);
@@ -45,6 +45,44 @@ function geocodeLatLng(geocoder, map, infowindow) {
     }
   });
 }
+
+//******************************************************************************
+//THIS IS THE START OF THE FUNCTIONS THAT WILL POPULATE OUR LOCATIONS DIVS WITH DATA
+var stagedMarkersList = []
+
+$('button#addMarker').on('click', function() {
+  var location = 'Location';
+  stagedMarkersList.push(location);
+  // We need to rerender the marker list of the right
+  console.log(stagedMarkersList)
+  appendStagedMarker(location)
+})
+
+// When a user creates a maker I want to push an item to the stagedMarkers List
+
+// Then I want to re render the marker list of the right
+
+
+//Function that populates list items on new_map and display_map pages using content from database.
+function appendStagedMarker(location) {
+  let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
+  $("#newMapMarkers").append(listItem);
+
+  // Append to the marker list container
+}
+
+
+function sendMarkers(mapID) {
+  var payload = {
+    markers: stagedMarkersList,
+    mapId: "asd"
+  }
+  var body = JSON.stringify(payload)
+
+  // Send over the body
+
+}
+//******************************************************************************
 
       // //this is what marker info we should pull from the database, just the lat: latitudeDB and lng:LongitudeDB,
       // //the information of the location will be fetched by reverse geocoding
@@ -131,8 +169,8 @@ function geocodeLatLng(geocoder, map, infowindow) {
       //   });
       // }
 
-      
-      
+
+
       // placeMarker(toronto);
       // geocodePlaceId(toronto)
       // }
