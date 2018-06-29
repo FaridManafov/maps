@@ -140,13 +140,13 @@ $("form").on("submit", function (event) {
 
     stagedMarkers.forEach(function(marker) {
       $.ajax({
+        method: "POST",
         url: "/markers",
         data: {
           mapId: mapId,
           markerLat: marker.markerLat,
           markerLng: marker.markerLng
-        },
-        type: "POST"
+        }
       })
     })
   })
