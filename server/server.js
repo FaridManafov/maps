@@ -25,25 +25,43 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(cookieSession({
   name: 'session',
-  keys: ['user_id']
+  keys: ['user_id', 'logged_in', 'name']
 }));
+
+
 
 /* Routes */
 
 app.get("/", (req, res) => {
-  res.render("index");
+  let templateVars = { user:
+     { userName: req.session.user_id,
+       loggedIn: req.session.logged_in }
+  };
+  res.render("index", templateVars);
 });
 
 app.get("/404", (req, res) => {
-  res.render("error")
+  let templateVars = { user:
+     { userName: [req.session.user_id],
+       loggedIn: [req.session.logged_in] }
+  };
+  res.render("error", templateVars)
 });
 
 app.get("/new", (req, res) => {
-  res.render("new_map");
+  let templateVars = { user:
+     { userName: [req.session.user_id],
+       loggedIn: [req.session.logged_in] }
+  };
+  res.render("new_map", templateVars);
 });
 
 app.get("/register", (req, res) => {
-  res.render("register");
+  let templateVars = { user:
+     { userName: [req.session.user_id],
+       loggedIn: [req.session.logged_in] }
+  };
+  res.render("register", templateVars);
 });
 
 app.post("/register", (req, res) => {
@@ -57,7 +75,7 @@ app.post("/register", (req, res) => {
       password: password
     })
     .then((result) => {
-      req.session.user_id = bcrypt.hashSync(username, salt)
+      req.session.user_id = username;
       res.redirect("/new");
     })
     .catch((error) => {
@@ -66,7 +84,11 @@ app.post("/register", (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  let templateVars = { user:
+     { userName: [req.session.user_id],
+       loggedIn: [req.session.logged_in] }
+  };
+  res.render('login', templateVars);
 })
 
 app.post('/login', (req, res) => {
@@ -83,8 +105,9 @@ app.post('/login', (req, res) => {
     } else {
       if (bcrypt.compareSync(password, data[0].password)) {
         let salt = bcrypt.genSaltSync(10);
-        req.session.user_id = bcrypt.hashSync(username, salt);
-        console.log('successful login ' + req.body.username);
+        req.session.user_id = username;
+        req.session.logged_in = true;
+        console.log('successful login ' + req.body);
         res.redirect("/")
       } else {
         res.redirect('login');
@@ -95,7 +118,7 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
   req.session = null;
-  res.redirect('/');
+  res.redirect('/login');
 })
 
 app.get('/users/id', (req, res) => {
