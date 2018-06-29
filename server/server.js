@@ -76,6 +76,7 @@ app.post("/register", (req, res) => {
     })
     .then((result) => {
       req.session.user_id = username;
+      req.session.logged_in = true;
       res.redirect("/new");
     })
     .catch((error) => {
