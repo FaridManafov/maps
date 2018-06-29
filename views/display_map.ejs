@@ -13,6 +13,17 @@
     <ul id="displayMapMarkers" class="list-group"></ul>
   </div>
 
+  <h1>
+    <%= map.name %>
+    <%= map.id %>
+    <%= map.createdBy %>
+
+    <% map.markers.forEach((marker) => { %>
+      <%= marker.latitude %>
+      <%= marker.longitude %>
+    <% }) %>
+  </h1>
+
 </container>
 
 <% include ./partials/footer %>

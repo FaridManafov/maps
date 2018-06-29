@@ -21,7 +21,6 @@ app.use(nodeSassMiddleware({
 }));
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json())//-------------------
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(cookieSession({
@@ -144,6 +143,38 @@ app.post('/maps', (req, res) => {
     })
   })
 })
+
+app.get('/maps/:id', (req, res) => {
+  let map = req.params.id;
+  knex('maps')
+  .where({ id: map })
+  .then((rows) => {
+    let map = rows[0];
+    knex('markers')
+    .where({ map_id: map.id })
+    .then((markers) => {
+      let templateVars =
+      { user:
+           { userName: req.session.username,
+             loggedIn: req.session.logged_in },
+
+        map: {
+          name: map.mapname,
+          id: map.id,
+          createdBy: map.created_by,
+          markers: markers
+        }
+      }
+      res.render('display_map', templateVars);
+    })
+  })
+})
+
+app.post('/markers', (req, res) => {
+
+})
+
+
 
 /* Start */
 app.listen(PORT, () => {
