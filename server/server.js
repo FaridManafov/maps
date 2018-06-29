@@ -41,10 +41,15 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
-//Once we have map id's to test with, this route will change to "/maps/"
+//Once we have map id's to test with, this route will change to "/maps/:id"
 app.get("/maps/id", (req, res) => {
   res.render("display_map");
 });
+
+//Once we have user id's to test with, this route will change to "/users/:id"
+app.get("/users/id", (req, res) => {
+  res.render("profile");
+})
 
 /* Start */
 
