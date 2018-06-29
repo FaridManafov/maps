@@ -171,7 +171,16 @@ app.get('/maps/:id', (req, res) => {
 })
 
 app.post('/markers', (req, res) => {
+  let map = req.body.mapId;
+  let lat = req.body.markerLat;
+  let long = req.body.markerLong;
 
+  knex('markers')
+  .insert({  })
+
+
+
+  knex.insert lat long
 })
 
 
