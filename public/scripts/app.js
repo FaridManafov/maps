@@ -7,7 +7,9 @@ var labelIndex = 0;
 var marker;
 var infowindow;
 var messagewindow;
-let addresses = []
+let stagedMarkers = []
+
+
 function initMap() {
   // console.log('knex', knex)
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -27,13 +29,20 @@ function initMap() {
     //FETCH lat lng from click
     var markerLat = marker.getPosition().lat();
     var markerLng = marker.getPosition().lng();
+    stagedMarkers.push({markerLat, markerLng});
+    console.log("staged:", stagedMarkers)
+    
 
+    //THIS HAS THE LAT LONG DATA CONSOLE LOGGED, SEND THIS TO THE COLLECTION 
+    console.log(markerLat)
+    console.log(markerLng)
     geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
     
       //click listener on the marker that opens a window info on the marker
     google.maps.event.addListener(marker, "click", function() {
       infowindow.open(map, marker);
     });
+    
   });
 
 
@@ -46,23 +55,23 @@ function initMap() {
   // });
 }
 
-//saves the marker information
-function saveData() {
-  var name = escape(document.getElementById("name").value);
-  var address = escape(document.getElementByIdtoronto("address").value);
-  var type = document.getElementById("type").value;
-  var latlng = marker.getPosition();
-  var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address +
-            "&type=" + type + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
+// //saves the marker information
+// function saveData() {
+//   var name = escape(document.getElementById("name").value);
+//   var address = escape(document.getElementByIdtoronto("address").value);
+//   var type = document.getElementById("type").value;
+//   var latlng = marker.getPosition();
+//   var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address +
+//             "&type=" + type + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
 
-  downloadUrl(url, function(data, responseCode) {
+//   downloadUrl(url, function(data, responseCode) {
 
-    if (responseCode == 200 && data.length <= 1) {
-      infowindow.close();
-      messagewindow.open(map, marker);
-    }
-  });
-}
+//     if (responseCode == 200 && data.length <= 1) {
+//       infowindow.close();
+//       messagewindow.open(map, marker);
+//     }
+//   });
+// }
 
 
 //reverse geocoding
@@ -80,6 +89,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
 
         var address = results[0].formatted_address;
         infowindow.setContent(address);
+
         console.log(address); 
         //Jquery into the html
         $('#result-address').text(address)

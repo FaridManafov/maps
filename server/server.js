@@ -19,6 +19,7 @@ app.use(nodeSassMiddleware({
 }));
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../public')));
 
 /* Routes */
@@ -44,6 +45,10 @@ app.post("/register", (req, res) => {
 app.get("/maps/id", (req, res) => {
   res.render("display_map");
 });
+
+app.post("/maps/markers", (req, res) => {
+  console.log(req.body)
+})
 
 /* Start */
 
