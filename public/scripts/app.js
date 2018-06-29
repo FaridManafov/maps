@@ -1,61 +1,76 @@
+// const knexConfig = require('../../server/knexfile.js')
+// const knex = require('knex')(knexConfig.development);
+
 var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
-var toronto = {lat: 43.6446, lng: -79.3950};
 var marker;
 var infowindow;
 var messagewindow;
+let stagedMarkers = []
+
 
 function initMap() {
+  // console.log('knex', knex)
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: 40.731, lng: -73.997}
+    zoom: 14,
+    center: {lat: 43.6446, lng: -79.3950}
   });
   var geocoder = new google.maps.Geocoder;
   var infowindow = new google.maps.InfoWindow;
 
-  geocodeLatLng(geocoder, map, infowindow);
-}
+  //click listener to make a new marker
+  google.maps.event.addListener(map, "click", function(event) {
+    marker = new google.maps.Marker({
+      position: event.latLng,
+      map: map
+    });
 
-function geocodeLatLng(geocoder, map, infowindow) {
-  // var input = document.getElementById('latlng').value;
-  // var latlngStr = input.split(',', 2);
-  // var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-  geocoder.geocode({'location': toronto}, function(results, status) {
-    if (status === 'OK') {
-      if (results[0]) {
-        map.setZoom(11);
-        var marker = new google.maps.Marker({
-          position: toronto,
-          map: map
-        });
-        //here is where the info is relayed in formatted address style
+    //FETCH lat lng from click
+    var markerLat = marker.getPosition().lat();
+    var markerLng = marker.getPosition().lng();
+    stagedMarkers.push({markerLat, markerLng});
+    console.log("staged:", stagedMarkers)
+    
 
-        var address = results[0].formatted_address;
-        infowindow.setContent(address);
-        console.log(address);
-        $('#result-address').text(address)
+    //THIS HAS THE LAT LONG DATA CONSOLE LOGGED, SEND THIS TO THE COLLECTION 
+    console.log(markerLat)
+    console.log(markerLng)
 
-        infowindow.open(map, marker);
-      } else {
-        window.alert('No results found');
-      }
-    } else {
-      window.alert('Geocoder failed due to: ' + status);
-    }
+    geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
+    
+      //click listener on the marker that opens a window info on the marker
+    google.maps.event.addListener(marker, "click", function() {
+      infowindow.open(map, marker);
+    });
+    
   });
 }
 
-//******************************************************************************
-//THIS IS THE START OF THE FUNCTIONS THAT WILL POPULATE OUR LOCATIONS DIVS WITH DATA
-var stagedMarkersList = []
+// function loadMarkerPayload(){
+  
+//   $.ajax({
+//     method: 'GET',
+//     url: /maps/markers,
+//     success: function(markerArray){
 
+//     }
+//   })
+// }
+
+function submitMarkerPayload(markerArray) {
+  $.ajax({
+    method: 'POST',
+    url: '/maps/markers',
+    data: markerArray
+  }).done(function(){
+
+  })
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $('button#addMarker').on('click', function() {
-  var location = 'Location';
-  stagedMarkersList.push(location);
-  // We need to rerender the marker list of the right
-  console.log(stagedMarkersList)
-  appendStagedMarker(location)
+
 })
 
 // When a user creates a maker I want to push an item to the stagedMarkers List
@@ -82,7 +97,68 @@ function sendMarkers(mapID) {
   // Send over the body
 
 }
-//******************************************************************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+  //callback
+  // geocodeLatLng(geocoder, map, infowindow);
+  //TEST
+  //   document.getElementById('submit').addEventListener('click', function() {
+  //   geocodeLatLng(geocoder, map, infowindow);
+  // });
+
+
+// //saves the marker information
+// function saveData() {
+//   var name = escape(document.getElementById("name").value);
+//   var address = escape(document.getElementByIdtoronto("address").value);
+//   var type = document.getElementById("type").value;
+//   var latlng = marker.getPosition();
+//   var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address +
+//             "&type=" + type + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
+
+//   downloadUrl(url, function(data, responseCode) {
+
+//     if (responseCode == 200 && data.length <= 1) {
+//       infowindow.close();
+//       messagewindow.open(map, marker);
+//     }
+//   });
+// }
+
+
+//reverse geocoding
+function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
+  var location = {lat: lat, lng: lng}
+  geocoder.geocode({'location': location}, function(results, status) {
+    if (status === 'OK') {
+      if (results[0]) {
+        
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        //here is where the info is relayed in formatted address style
+
+        var address = results[0].formatted_address;
+        infowindow.setContent(address);
+        appendStagedMarker(address)
+        console.log(address); 
+        //Jquery into the html
+        $('#result-address').text(address)
+
+        infowindow.open(map, marker);
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+  });
+}
+
 
       // //this is what marker info we should pull from the database, just the lat: latitudeDB and lng:LongitudeDB,
       // //the information of the location will be fetched by reverse geocoding
@@ -156,7 +232,8 @@ function sendMarkers(mapID) {
       //         map.setCenter(results[0].geometry.location);
       //         var marker = new google.maps.Marker({
       //           map: map,
-      //           position: results[0].geometry.location
+      //           position: results[0].geometry.location  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initMap"></script> -->
+
       //         });
       //         infowindow.setContent(results[0].formatted_address);
       //         infowindow.open(map, marker);
