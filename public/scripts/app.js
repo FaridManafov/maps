@@ -80,11 +80,11 @@ $('button#addMarker').on('click', function() {
 
 //Function that populates list items on new_map and display_map pages using content from database.
 function appendStagedMarker(location) {
+  $("#newMapMarkers").empty();
   let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
   $("#newMapMarkers").append(listItem);
-
-  // Append to the marker list container
 }
+
 
 
 function sendMarkers(mapID) {
