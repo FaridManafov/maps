@@ -1,6 +1,6 @@
 <% include ./partials/header %>
 
-<h1 align="center">Create A New Map</h1>
+<h1 class="leftAlignedHeading">Create A New Map</h1>
 
 <container class="mapAndMapInfo">
 
@@ -10,9 +10,22 @@
   <!-- List of markers that user has created on this map. -->
   <div class="listOfMarkers">
     <h2>My Locations</h2>
+    <ul id="newMapMarkers" class="list-group"></ul>
   </div>
 
 </container>
 
+<!-- Button that will send a POST request to the database with all the marker info. -->
+<form method="POST" action="/maps/markers">
+  <input id="save" class="btn btn-primary btn-md" type="submit" value="Save">
+</form>
+
+<!-- Dummy button to test location list population (until map clicking is implemented.) -->
+<button id="addMarker">Add Marker</button>
+
 <% include ./partials/footer %>
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initMap">
+</script>
+</body>
+</html>

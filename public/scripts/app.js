@@ -36,6 +36,7 @@ function initMap() {
     //THIS HAS THE LAT LONG DATA CONSOLE LOGGED, SEND THIS TO THE COLLECTION 
     console.log(markerLat)
     console.log(markerLng)
+
     geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
     
       //click listener on the marker that opens a window info on the marker
@@ -44,6 +45,60 @@ function initMap() {
     });
     
   });
+}
+
+// function loadMarkerPayload(){
+  
+//   $.ajax({
+//     method: 'GET',
+//     url: /maps/markers,
+//     success: function(markerArray){
+
+//     }
+//   })
+// }
+
+function submitMarkerPayload(markerArray) {
+  $.ajax({
+    method: 'POST',
+    url: '/maps/markers',
+    data: markerArray
+  }).done(function(){
+
+  })
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$('button#addMarker').on('click', function() {
+
+})
+
+// When a user creates a maker I want to push an item to the stagedMarkers List
+
+// Then I want to re render the marker list of the right
+
+
+//Function that populates list items on new_map and display_map pages using content from database.
+function appendStagedMarker(location) {
+  let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
+  $("#newMapMarkers").append(listItem);
+
+  // Append to the marker list container
+}
+
+
+function sendMarkers(mapID) {
+  var payload = {
+    markers: stagedMarkersList,
+    mapId: "asd"
+  }
+  var body = JSON.stringify(payload)
+
+  // Send over the body
+
+}
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 
@@ -53,7 +108,7 @@ function initMap() {
   //   document.getElementById('submit').addEventListener('click', function() {
   //   geocodeLatLng(geocoder, map, infowindow);
   // });
-}
+
 
 // //saves the marker information
 // function saveData() {
@@ -89,7 +144,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
 
         var address = results[0].formatted_address;
         infowindow.setContent(address);
-
+        appendStagedMarker(address)
         console.log(address); 
         //Jquery into the html
         $('#result-address').text(address)
