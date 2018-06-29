@@ -31,24 +31,24 @@ function initMap() {
     var markerLng = marker.getPosition().lng();
     stagedMarkers.push({markerLat, markerLng});
     console.log("staged:", stagedMarkers)
-    
 
-    //THIS HAS THE LAT LONG DATA CONSOLE LOGGED, SEND THIS TO THE COLLECTION 
+
+    //THIS HAS THE LAT LONG DATA CONSOLE LOGGED, SEND THIS TO THE COLLECTION
     console.log(markerLat)
     console.log(markerLng)
 
     geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
-    
+
       //click listener on the marker that opens a window info on the marker
     google.maps.event.addListener(marker, "click", function() {
       infowindow.open(map, marker);
     });
-    
+
   });
 }
 
 // function loadMarkerPayload(){
-  
+
 //   $.ajax({
 //     method: 'GET',
 //     url: /maps/markers,
@@ -135,7 +135,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
   geocoder.geocode({'location': location}, function(results, status) {
     if (status === 'OK') {
       if (results[0]) {
-        
+
         var marker = new google.maps.Marker({
           position: location,
           map: map
@@ -145,7 +145,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
         var address = results[0].formatted_address;
         infowindow.setContent(address);
         appendStagedMarker(address)
-        console.log(address); 
+        console.log(address);
         //Jquery into the html
         $('#result-address').text(address)
 
