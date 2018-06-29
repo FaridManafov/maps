@@ -1,9 +1,13 @@
 #navcontainer {
   font-size: 15px;
-  #nav-dropdown {
-    align-content: flex-end;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: row;
+
+  .user-ui {
+    display: flex;
+    flex-direction: row;
   }
-  margin-bottom: 50px;
 }
 
 .bg-light {
