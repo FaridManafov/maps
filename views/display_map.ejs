@@ -17,14 +17,15 @@
       <%= map.name %>
       <%= map.createdBy %>
     </h1>
-
-      <% map.markers.forEach((marker) => { %>
-        <div class="hiddenMarker">
-          <div class="latitude"> <%= marker.latitude %> </div>
-          <div class="longitude"> <%= marker.longitude %> </div>
-        </div>
-      <% }) %>
-
+    <div class="all-markers">
+      <%= JSON.stringify(map.markers) %>
+    </div>
+    <!-- <% map.markers.forEach((marker) => { %>
+      <div class="hiddenMarker">
+        <div class="latitude"> <%= marker.latitude %> </div>
+        <div class="longitude"> <%= marker.longitude %> </div>
+      </div>
+      <% }) %> -->
 
 </container>
 

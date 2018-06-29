@@ -127,7 +127,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
 }
 
 //SUBMITTING WITH 'SAVE' BUTTON
-$("#new-map-submission").on("submit", function (event) {
+$("form").on("submit", function (event) {
   event.preventDefault();
   let mapName = $("input.mapName").val()
 
