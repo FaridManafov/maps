@@ -1,13 +1,25 @@
-.profilePic {
-  height: 125px;
-}
-
 .username {
-  display: flex;
-  display: inline-block;
+  padding-top: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin-left: 1rem;
 }
 
-.threeEqualDivs {
-  display: inline-flex;
-  width: 30%;
+.twoEqualDivs {
+  display: inline-grid;
+  width: 45%;
+  max-height: 30rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  overflow: scroll;
+
+  .sectionTitles {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.75rem;
+    height: 1.75rem;
+    text-align: center;
+  }
+
 }
+
