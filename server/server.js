@@ -176,11 +176,11 @@ app.post('/markers', (req, res) => {
   let long = req.body.markerLong;
 
   knex('markers')
-  .insert({  })
-
-
-
-  knex.insert lat long
+  .insert({ map_id: map, latitude: lat, longitude: long })
+  .then((marker) => {
+    console.log(marker)
+    res.redirect('/maps/:map')
+  })
 })
 
 

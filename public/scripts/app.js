@@ -132,7 +132,7 @@ $("form").on("submit", function (event) {
   let mapName = $("input.mapName").val()
 
   $.ajax({
-    method: POST,
+    method: "POST",
     url: "/maps",
     data: {mapName: mapName}
   }).done(function(data) {
