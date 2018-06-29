@@ -51,8 +51,10 @@ function geocodeLatLng(geocoder, map, infowindow) {
 var stagedMarkersList = []
 
 $('button#addMarker').on('click', function() {
-  var location = 'Location';
-  stagedMarkersList.push(location);
+  var location =
+  var markerLat = marker.getPosition().lat();
+  var markerLng = marker.getPosition().lng();
+  stagedMarkersList.push({markerLat, markerLng});
   // We need to rerender the marker list of the right
   console.log(stagedMarkersList)
   appendStagedMarker(location)
