@@ -8,6 +8,7 @@ var marker;
 var infowindow;
 var messagewindow;
 let stagedMarkers = []
+let mapId = null;
 
 
 function initMap() {
@@ -69,9 +70,6 @@ function submitMarkerPayload(markerArray) {
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-$('button#addMarker').on('click', function() {
-
-})
 
 // When a user creates a maker I want to push an item to the stagedMarkers List
 
@@ -80,7 +78,6 @@ $('button#addMarker').on('click', function() {
 
 //Function that populates list items on new_map and display_map pages using content from database.
 function appendStagedMarker(location) {
-  $("#newMapMarkers").empty();
   let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
   $("#newMapMarkers").append(listItem);
 }
@@ -98,36 +95,6 @@ function sendMarkers(mapID) {
 
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
-  //callback
-  // geocodeLatLng(geocoder, map, infowindow);
-  //TEST
-  //   document.getElementById('submit').addEventListener('click', function() {
-  //   geocodeLatLng(geocoder, map, infowindow);
-  // });
-
-
-// //saves the marker information
-// function saveData() {
-//   var name = escape(document.getElementById("name").value);
-//   var address = escape(document.getElementByIdtoronto("address").value);
-//   var type = document.getElementById("type").value;
-//   var latlng = marker.getPosition();
-//   var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address +
-//             "&type=" + type + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
-
-//   downloadUrl(url, function(data, responseCode) {
-
-//     if (responseCode == 200 && data.length <= 1) {
-//       infowindow.close();
-//       messagewindow.open(map, marker);
-//     }
-//   });
-// }
-
 
 //reverse geocoding
 function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
@@ -159,13 +126,67 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
   });
 }
 
+//SUBMITTING WITH 'SAVE' BUTTON
+$("form").on("submit", function (event) {
+  event.preventDefault();
+  let mapName = $("input.mapName").val()
+
+  $.ajax({
+    method: POST,
+    url: "/maps",
+    data: {mapName: mapName}
+  }).done(function(data) {
+    mapId = data.id;
+
+    stagedMarkers.forEach(function(marker) {
+      $.ajax({
+        url: "/markers",
+        data: {
+          mapId: mapId,
+          markerLat: marker.markerLat,
+          markerLng: marker.markerLng
+        },
+        type: "POST"
+      })
+    })
+  })
+})
+
+
+  //callback
+  // geocodeLatLng(geocoder, map, infowindow);
+  //TEST
+  //   document.getElementById('submit').addEventListener('click', function() {
+  //   geocodeLatLng(geocoder, map, infowindow);
+  // });
+
+
+// //saves the marker information
+// function saveData() {
+//   var name = escape(document.getElementById("name").value);
+//   var address = escape(document.getElementByIdtoronto("address").value);
+//   var type = document.getElementById("type").value;
+//   var latlng = marker.getPosition();
+//   var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address +
+//             "&type=" + type + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
+
+//   downloadUrl(url, function(data, responseCode) {
+
+//     if (responseCode == 200 && data.length <= 1) {
+//       infowindow.close();
+//       messagewindow.open(map, marker);
+//     }
+//   });
+// }
+
+
+
 
       // //this is what marker info we should pull from the database, just the lat: latitudeDB and lng:LongitudeDB,
       // //the information of the location will be fetched by reverse geocoding
 
 
-      // //this initializes the map, the only thing to remember is zoom and centre,
-      // //zoom zooms closer to the map the higher the number, 14 is a good num
+      // //this initializes the map
       // //centre is where the map will be centered
       // function initMap() {
       //   map = new google.maps.Map(
