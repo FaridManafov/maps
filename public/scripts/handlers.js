@@ -50,10 +50,8 @@ $(document).ready(function() {
 
       errors = [];
     } else {
-      console.log(username, password);
       username.join('');
       password.join('');
-      console.log(username, password);
     }
 
   });

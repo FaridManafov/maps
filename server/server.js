@@ -34,6 +34,10 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/404", (req, res) => {
+  res.render("error")
+});
+
 app.get("/new", (req, res) => {
   res.render("new_map");
 });
@@ -43,19 +47,50 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  console.log('REQ.BODY.USERNAME:', req.body.username);
-  console.log('REQ.BODY.USERPASSWORD:', req.body.userpassword);
   let salt = bcrypt.genSaltSync(10);
   let username = req.body.username;
-  let password = bcrypt.hashSync(req.body.userpassword, salt);
-  console.log(username, password)
+  let password = bcrypt.hashSync(req.body.password, salt);
 
   knex('users')
-    .where({ username: username, password: password })
-    .then((data) => {
-      console.log(data);
-      res.redirect("/");
-    });
+    .insert({
+      username: username,
+      password: password
+    })
+    .then((result) => {
+      req.session.user_id = bcrypt.hashSync(username, salt)
+      res.redirect("/new");
+    })
+    .catch((error) => {
+      res.redirect("/register")
+    })
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+})
+
+app.post('/login', (req, res) => {
+  let username = req.body.username;
+  let password = req.body.userpassword;
+
+  knex('users')
+  .where({ username: username })
+  .then((data) => {
+    console.log(data);
+    if (data.length <= 0) {
+      res.redirect("/register");
+      return;
+    } else {
+      if (bcrypt.compareSync(password, data[0].password)) {
+        let salt = bcrypt.genSaltSync(10);
+        req.session.user_id = bcrypt.hashSync(username, salt);
+        console.log('successful login ' + req.body.username);
+        res.redirect("/")
+      } else {
+        res.redirect('login');
+      }
+    }
+  });
 });
 
 /* Start */
