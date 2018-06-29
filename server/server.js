@@ -25,13 +25,19 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(cookieSession({
   name: 'session',
-  keys: ['user_id']
+  keys: ['user_id', 'logged_in']
 }));
 
 /* Routes */
 
 app.get("/", (req, res) => {
-  res.render("index");
+  let templateVars = { user:
+     {  userName: [req.session.user_id],
+        loggedIn: [req.session.logged_in] }
+     };
+
+     console.log(templateVars);
+  res.render("index", templateVars);
 });
 
 app.get("/404", (req, res) => {
@@ -83,8 +89,9 @@ app.post('/login', (req, res) => {
     } else {
       if (bcrypt.compareSync(password, data[0].password)) {
         let salt = bcrypt.genSaltSync(10);
-        req.session.user_id = bcrypt.hashSync(username, salt);
-        console.log('successful login ' + req.body.username);
+        req.session.user_id = username;
+        req.session.logged_in = true;
+        console.log('successful login ' + req.body);
         res.redirect("/")
       } else {
         res.redirect('login');

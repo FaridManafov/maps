@@ -20,4 +20,5 @@ exports.seed = function(knex, Promise) {
   return deleteAllUsers()
     .then(createUsers)
     .then(data => console.log('seeded!'));
+
 };
