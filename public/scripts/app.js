@@ -136,6 +136,7 @@ $("form").on("submit", function (event) {
     url: "/maps",
     data: {mapName: mapName}
   }).done(function(data) {
+    console.log(data);
     mapId = data.id;
 
     stagedMarkers.forEach(function(marker) {

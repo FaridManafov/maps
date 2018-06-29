@@ -139,7 +139,7 @@ app.post('/maps', (req, res) => {
   .returning('id')
   .then((id) => {
     res.json({
-      id: id
+      id: id[0]
     })
   })
 })
@@ -171,15 +171,16 @@ app.get('/maps/:id', (req, res) => {
 })
 
 app.post('/markers', (req, res) => {
+  console.log(req.body);
   let map = req.body.mapId;
   let lat = req.body.markerLat;
-  let long = req.body.markerLong;
+  let long = req.body.markerLng;
 
   knex('markers')
   .insert({ map_id: map, latitude: lat, longitude: long })
   .then((marker) => {
     console.log(marker)
-    res.redirect('/maps/:map')
+    res.sendStatus(200)
   })
 })
 
