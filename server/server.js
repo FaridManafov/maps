@@ -25,13 +25,13 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(cookieSession({
   name: 'session',
-  keys: ['user_id', 'logged_in', 'name']
+  keys: ['random']
 }));
 
 /* Routes */
 app.get("/", (req, res) => {
   let templateVars = { user:
-     { userName: req.session.user_id,
+     { userName: req.session.username,
        loggedIn: req.session.logged_in }
   };
   res.render("index", templateVars);
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 
 app.get("/404", (req, res) => {
   let templateVars = { user:
-     { userName: req.session.user_id,
+     { userName: req.session.username,
        loggedIn: req.session.logged_in }
   };
   res.render("error", templateVars)
@@ -47,7 +47,7 @@ app.get("/404", (req, res) => {
 
 app.get("/new", (req, res) => {
   let templateVars = { user:
-     { userName: req.session.user_id,
+     { userName: req.session.username,
        loggedIn: req.session.logged_in }
   };
   res.render("new_map", templateVars);
@@ -55,7 +55,7 @@ app.get("/new", (req, res) => {
 
 app.get("/register", (req, res) => {
   let templateVars = { user:
-     { userName: req.session.user_id,
+     { userName: req.session.username,
        loggedIn: req.session.logged_in }
   };
   res.render("register", templateVars);
@@ -71,8 +71,10 @@ app.post("/register", (req, res) => {
       username: username,
       password: password
     })
-    .then((result) => {
-      req.session.user_id = username;
+    .returning('id')
+    .then((id) => {
+      req.session.user_id = id;
+      req.session.username = username;
       req.session.logged_in = true;
       res.redirect("/new");
     })
@@ -83,7 +85,7 @@ app.post("/register", (req, res) => {
 
 app.get('/login', (req, res) => {
   let templateVars = { user:
-     { userName: req.session.user_id,
+     { userName: req.session.username,
        loggedIn: req.session.logged_in }
   };
   res.render('login', templateVars);
@@ -103,7 +105,8 @@ app.post('/login', (req, res) => {
     } else {
       if (bcrypt.compareSync(password, data[0].password)) {
         let salt = bcrypt.genSaltSync(10);
-        req.session.user_id = username;
+        req.session.user_id = data[0].id;
+        req.session.username = data[0].username;
         req.session.logged_in = true;
         console.log('successful login ' + req.body);
         res.redirect("/")
@@ -125,6 +128,20 @@ app.get('/users/id', (req, res) => {
 
 app.get('/maps/id', (req, res) => {
   res.render('display_map');
+})
+
+app.post('/maps', (req, res) => {
+  let mapName = req.body.name;
+  let user = req.session.user_id;
+
+  knex('maps')
+  .insert({ mapname: mapName, created_by: user  })
+  .returning('id')
+  .then((id) => {
+    res.json({
+      id: id
+    })
+  })
 })
 
 /* Start */
