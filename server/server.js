@@ -170,6 +170,13 @@ app.get('/maps/:id', (req, res) => {
   })
 })
 
+//********SEND ELEMENTS WITH CLASS .hiddenMarker TO GOOGLE MAPS API *************
+
+// $('.hiddenMarker').val()
+
+//*******************************************************************************
+
+
 app.post('/markers', (req, res) => {
   console.log(req.body);
   let map = req.body.mapId;
