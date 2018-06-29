@@ -98,6 +98,14 @@ app.post('/logout', (req, res) => {
   res.redirect('/');
 })
 
+app.get('/users/id', (req, res) => {
+  res.render('profile');
+})
+
+app.get('/maps/id', (req, res) => {
+  res.render('display_map');
+})
+
 /* Start */
 app.listen(PORT, () => {
   console.log(` => * Maps server listening on port ${PORT} *`);
