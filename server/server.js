@@ -46,11 +46,15 @@ app.get("/404", (req, res) => {
 });
 
 app.get("/new", (req, res) => {
-  let templateVars = { user:
+  if (req.session.user_id) {
+    let templateVars = { user:
      { userName: req.session.username,
        loggedIn: req.session.logged_in }
   };
   res.render("new_map", templateVars);
+  } else {
+    res.redirect("/");
+  }
 });
 
 app.get("/register", (req, res) => {
