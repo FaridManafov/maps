@@ -10,16 +10,16 @@ var messagewindow;
 let stagedMarkers = []
 let mapId = null;
 
+
 function initMap() {
-  // console.log('knex', knex)
   $(document).ready(function() {
-    let markers = JSON.parse($('.markers-hidden').text());
+  let markers = JSON.parse($('.markers-hidden').text());
     markers.forEach((element) => {
       console.log(element.latitude);
       console.log(element.longitude);
     })
   });
-
+  // console.log('knex', knex)
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
     center: {lat: 43.6446, lng: -79.3950}
@@ -133,7 +133,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
   });
 }
 
-//SUBMITTING WITH 'SAVE' BUTTON ON '/NEW'
+//SUBMITTING WITH 'SAVE' BUTTON
 $("#new-map-submission").on("submit", function (event) {
   event.preventDefault();
   let mapName = $("input.mapName").val()
@@ -155,27 +155,10 @@ $("#new-map-submission").on("submit", function (event) {
           markerLat: marker.markerLat,
           markerLng: marker.markerLng
         }
-        console.log(data);
       })
     })
   })
 })
-
-//SUBMITTING EDITED VERSION OF MAP WITH 'SAVE' BUTTON ON '/MAPS/:ID' (WORK IN PROGRESS)
-// $("#edited-map-submssion").on("submit", function (event) {
-//   event.preventDefault();
-
-//   $.ajax({
-//     method: "PUT",
-//     url: "/maps",
-//     data: {
-//       mapId: req.params.id,
-//       markerLat: marker.markerLat,
-//       markerLng: marker.markerLng
-//     }
-//     console.log("updated: ", data);
-//   })
-// })
 
 
   //callback
