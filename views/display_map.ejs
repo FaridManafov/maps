@@ -13,11 +13,12 @@
     <ul id="displayMapMarkers" class="list-group"></ul>
   </div>
 
+  //this is where the markers are being posted to the browser page
   <h1>
     <%= map.name %>
     <%= map.createdBy %>
   </h1>
-
+  <!-- target markers-hidden with jquery and parse the json -->
   <div class="markers-hidden">
     <%= JSON.stringify(map.markers) %>
   </div>

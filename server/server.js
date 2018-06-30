@@ -154,6 +154,7 @@ app.get('/maps/:id', (req, res) => {
     knex('markers')
     .where({ map_id: map.id })
     .then((markers) => {
+      //this is where (templatevars) has data passed from
       let templateVars =
       { user:
            { userName: req.session.username,
