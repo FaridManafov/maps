@@ -28,9 +28,14 @@
 </container>
 
 <!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
-<!-- <form id="edited-map-submssion" method="PUT" action="/maps" >
+<form class="save-and-favorite-forms" id="edited-map-submssion" method="PUT" action="/maps" >
   <input id="save" class="btn btn-primary btn-md" type="submit" value="Save">
-</form> -->
+</form>
+
+<!-- FAVORITE BUTTON THAT SHOULD POST TO USERS TABLE IN DATABASE -->
+<form class="save-and-favorite-forms" id="favorite-map-submssion" method="POST" action="/users" >
+  <input id="favorite" class="btn btn-primary btn-md" type="submit" value="Favorite">
+</form>
 
 <% include ./partials/footer %>
 

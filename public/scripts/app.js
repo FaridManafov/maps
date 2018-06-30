@@ -155,7 +155,6 @@ $("#new-map-submission").on("submit", function (event) {
           markerLat: marker.markerLat,
           markerLng: marker.markerLng
         }
-        console.log("original: ", data);
       })
     })
   })
@@ -168,14 +167,25 @@ $("#new-map-submission").on("submit", function (event) {
 //   $.ajax({
 //     method: "PUT",
 //     url: "/maps",
-//     data: {
-//       mapId: req.params.id,
-//       markerLat: marker.markerLat,
-//       markerLng: marker.markerLng
-//     }
-//     console.log("edited: ", data);
+//     data: {mapId: req.params.id}
+//   }).done(function(data) {
+//     console.log("edited data: ", data);
+
+//     stagedMarkers.forEach(function(marker) {
+//       $.ajax({
+//         method: "PUT",
+//         url: "/markers",
+//         data: {
+//           mapId: mapId,
+//           markerLat: marker.markerLat,
+//           markerLng: marker.markerLng
+//         }
+//       })
+//     })
 //   })
 // })
+
+// SUBMITTING MAP TO A USER'S FAVORITES WITH 'FAVORITE' BUTTON ON '/MAPS/:ID' (WORK IN PROGRESS)
 
 
   //callback
