@@ -2,27 +2,16 @@
 
 <div class="container">
 
-  <h1 class="username">Username</h1>
+  <h1 class="username"><%= data.profile %></h1>
 
-</div>
-
-
-<div class="container">
-
-  <div class="twoEqualDivs">
-
-    <h2 class="sectionTitles">Maps</h2>
-    <div> <%= data.profileMaps %>
-
+  <div class="half-container-div">
+    <h2>Maps</h2>
+    <%= data.profileMaps %>
   </div>
 
-
-
-  <div id="favorites" class="twoEqualDivs">
-
-    <h2 class="sectionTitles">Favorites</h2>
-
-
+  <div class="half-container-div">
+    <h2>Favorites</h2>
+    <%= data.profileFavorites %>
   </div>
 
 </div>

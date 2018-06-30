@@ -5,13 +5,12 @@
   margin-left: 1rem;
 }
 
-.twoEqualDivs {
+.half-container-div {
   display: inline-grid;
   width: 45%;
   max-height: 30rem;
   margin-left: 1rem;
   margin-right: 1rem;
-  overflow: scroll;
 
   .sectionTitles {
     font-family: 'Roboto', sans-serif;
@@ -22,4 +21,3 @@
   }
 
 }
-

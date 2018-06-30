@@ -218,7 +218,7 @@ app.get('/users/:id', (req, res) => {
       .then((row) => {
         info.favorites.push([favoriteMap, row[0].mapname])
         knex('maps')
-        .where({ created_by: user })
+        .where({ created_by: user }) 
         .then((row) => {
           info.maps.push([row[0].id, row[0].mapname])
           let templateVars = {
