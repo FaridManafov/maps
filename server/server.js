@@ -202,6 +202,7 @@ app.post('/favorites', (req, res) => {
   })
 })
 
+
 app.get('/users/:id', (req, res) => {
   let user = req.params.id;
   knex('users')

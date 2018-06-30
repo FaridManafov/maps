@@ -39,7 +39,10 @@ exports.seed = function(knex, Promise) {
     return knex('maps').insert([
       { mapname: 'Best places to eat in Toronto', created_by: 1},
       { mapname: 'Travel plans 2019', created_by: 2},
-      { mapname: 'Favorite live music venues in Vancouver', created_by: 3}
+      { mapname: 'Favorite live music venues in Vancouver', created_by: 3},
+      { mapname: 'Dangerous places to walk at night', created_by: 1},
+      { mapname: 'Where I want to go', created_by: 3},
+      { mapname: 'Favorite live music venues in Toronto', created_by: 3}
     ])
   }
 
@@ -54,6 +57,8 @@ exports.seed = function(knex, Promise) {
   function createFavorites() {
     return knex('favorites').insert([
       { map_id: 1, user_id: 1},
+      { map_id: 3, user_id: 1},
+      { map_id: 4, user_id: 1},
       { map_id: 1, user_id: 2},
       { map_id: 1, user_id: 3}
     ])
@@ -68,9 +73,9 @@ exports.seed = function(knex, Promise) {
   }
 
   return deleteAllFavorites()
-  .then(deleteAllCollaborators)
-  .then(deleteAllMarkers)
   .then(deleteAllMaps)
+  .then(deleteAllMarkers)
+  .then(deleteAllCollaborators)
   .then(deleteAllUsers)
   .then(createUsers)
   .then(createMaps)
