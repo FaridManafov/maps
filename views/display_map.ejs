@@ -13,21 +13,24 @@
     <ul id="displayMapMarkers" class="list-group"></ul>
   </div>
 
-    <h1>
-      <%= map.name %>
-      <%= map.createdBy %>
-    </h1>
-    <div class="all-markers">
-      <%= JSON.stringify(map.markers) %>
+  <h1>
+    <%= map.name %>
+    <%= map.createdBy %>
+  </h1>
+
+  <% map.markers.forEach((marker) => { %>
+    <div class="hiddenMarker">
+      <div class="latitude"> <%= marker.latitude %> </div>
+      <div class="longitude"> <%= marker.longitude %> </div>
     </div>
-    <!-- <% map.markers.forEach((marker) => { %>
-      <div class="hiddenMarker">
-        <div class="latitude"> <%= marker.latitude %> </div>
-        <div class="longitude"> <%= marker.longitude %> </div>
-      </div>
-      <% }) %> -->
+  <% }) %>
 
 </container>
+
+<!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
+<!-- <form id="edited-map-submssion" method="PUT" action="/maps" >
+  <input id="" class="btn btn-primary btn-md" type="" value="Save">
+</form> -->
 
 <% include ./partials/footer %>
 

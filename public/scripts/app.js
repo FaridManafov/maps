@@ -126,7 +126,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
   });
 }
 
-//SUBMITTING WITH 'SAVE' BUTTON
+//SUBMITTING WITH 'SAVE' BUTTON ON '/NEW'
 $("#new-map-submission").on("submit", function (event) {
   event.preventDefault();
   let mapName = $("input.mapName").val()
@@ -152,6 +152,17 @@ $("#new-map-submission").on("submit", function (event) {
     })
   })
 })
+
+//SUBMITTING EDITED VERSION OF MAP WITH 'SAVE' BUTTON ON '/MAPS/:ID' (WORK IN PROGRESS)
+// $("#edited-map-submssion").on("submit", function (event) {
+//   event.preventDefault();
+
+//   $.ajax({
+//     method: "PUT",
+//     url: "/maps",
+//     data
+//   })
+// })
 
 
   //callback
