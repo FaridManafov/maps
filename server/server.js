@@ -222,9 +222,13 @@ app.get('/users/:id', (req, res) => {
       .then((row) => {
         info.favorites.push([favoriteMap, row[0].mapname])
         knex('maps')
-        .where({ created_by: user }) 
+        .where({ created_by: user })
         .then((row) => {
-          info.maps.push([row[0].id, row[0].mapname])
+
+          row.forEach((map) => {
+            info.maps.push([map.id, map.mapname])
+          })
+
           let templateVars = {
             data: {
               profile: info.name,
@@ -237,7 +241,10 @@ app.get('/users/:id', (req, res) => {
             }
           }
           res.render('profile', templateVars);
+
         })
+
+
       })
     })
   })
