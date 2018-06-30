@@ -31,7 +31,9 @@ function initMap() {
   google.maps.event.addListener(map, "click", function(event) {
     marker = new google.maps.Marker({
       position: event.latLng,
-      map: map
+      map: map,
+      label: labels[labelIndex++ % labels.length],
+      animation: google.maps.Animation.DROP
     });
 
     //FETCH lat lng from click
@@ -110,10 +112,6 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
     if (status === 'OK') {
       if (results[0]) {
 
-        var marker = new google.maps.Marker({
-          position: location,
-          map: map
-        });
         //here is where the info is relayed in formatted address style
 
         var address = results[0].formatted_address;
