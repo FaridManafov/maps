@@ -122,10 +122,6 @@ app.post('/logout', (req, res) => {
   res.redirect('/login');
 })
 
-app.get('/users/:id', (req, res) => {
-  res.render('profile');
-})
-
 app.get('/maps/id', (req, res) => {
   res.render('display_map');
 })
@@ -154,7 +150,6 @@ app.get('/maps/:id', (req, res) => {
     knex('markers')
     .where({ map_id: map.id })
     .then((markers) => {
-      //this is where (templatevars) has data passed from
       let templateVars =
       { user:
            { userName: req.session.username,
@@ -171,13 +166,6 @@ app.get('/maps/:id', (req, res) => {
     })
   })
 })
-
-//********SEND ELEMENTS WITH CLASS .hiddenMarker TO GOOGLE MAPS API *************
-
-// $('.hiddenMarker').val()
-
-//*******************************************************************************
-
 
 app.post('/markers', (req, res) => {
   console.log(req.body);
@@ -202,9 +190,44 @@ app.post('/favorites', (req, res) => {
 })
 
 app.get('/users/:id', (req, res) => {
-
+  let user = req.params.id;
   knex('users')
-
+  .where({ id: user })
+  .then((row) => {
+    let info = {
+      name: '',
+      maps: [],
+      favorites: []
+    };
+    info.name = row[0].username;
+    knex('favorites')
+    .where({ user_id: user })
+    .then((row) => {
+      let favoriteMap = row[0].map_id;
+      knex('maps')
+      .where({ id: favoriteMap})
+      .then((row) => {
+        info.favorites.push([favoriteMap, row[0].mapname])
+        knex('maps')
+        .where({ created_by: user })
+        .then((row) => {
+          info.maps.push([row[0].id, row[0].mapname])
+          let templateVars = {
+            data: {
+              profile: info.name,
+              profileMaps: info.maps,
+              profileFavorites: info.favorites
+            },
+            user: {
+              userName: req.session.username,
+              loggedIn: req.session.logged_in
+            }
+          }
+          res.render('profile', templateVars);
+        })
+      })
+    })
+  })
 })
 
 /* Start */
