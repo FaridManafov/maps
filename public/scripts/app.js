@@ -155,6 +155,7 @@ $("#new-map-submission").on("submit", function (event) {
           markerLat: marker.markerLat,
           markerLng: marker.markerLng
         }
+        console.log(data);
       })
     })
   })
@@ -167,7 +168,12 @@ $("#new-map-submission").on("submit", function (event) {
 //   $.ajax({
 //     method: "PUT",
 //     url: "/maps",
-//     data
+//     data: {
+//       mapId: req.params.id,
+//       markerLat: marker.markerLat,
+//       markerLng: marker.markerLng
+//     }
+//     console.log("updated: ", data);
 //   })
 // })
 
