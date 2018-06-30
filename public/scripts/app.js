@@ -10,9 +10,16 @@ var messagewindow;
 let stagedMarkers = []
 let mapId = null;
 
-
 function initMap() {
   // console.log('knex', knex)
+  $(document).ready(function() {
+    let markers = JSON.parse($('.markers-hidden').text());
+    markers.forEach((element) => {
+      console.log(element.latitude);
+      console.log(element.longitude);
+    })
+  });
+
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
     center: {lat: 43.6446, lng: -79.3950}
