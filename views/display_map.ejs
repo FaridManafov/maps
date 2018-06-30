@@ -13,23 +13,23 @@
     <ul id="displayMapMarkers" class="list-group"></ul>
   </div>
 
+
+  //this is where the markers are being posted to the browser page
   <h1>
     <%= map.name %>
     <%= map.createdBy %>
   </h1>
 
-  <% map.markers.forEach((marker) => { %>
-    <div class="hiddenMarker">
-      <div class="latitude"> <%= marker.latitude %> </div>
-      <div class="longitude"> <%= marker.longitude %> </div>
-    </div>
-  <% }) %>
+  <!-- target markers-hidden with jquery and parse the json -->
+  <div class="markers-hidden">
+    <%= JSON.stringify(map.markers) %>
+  </div>
 
 </container>
 
 <!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
-<!-- <form method= action=>
-  <input id="save" class="btn btn-primary btn-md" type="submit" value="Save">
+<!-- <form id="edited-map-submssion" method="PUT" action="/maps" >
+  <input id="" class="btn btn-primary btn-md" type="" value="Save">
 </form> -->
 
 <% include ./partials/footer %>
