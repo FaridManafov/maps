@@ -122,7 +122,7 @@ app.post('/logout', (req, res) => {
   res.redirect('/login');
 })
 
-app.get('/users/id', (req, res) => {
+app.get('/users/:id', (req, res) => {
   res.render('profile');
 })
 
@@ -191,6 +191,14 @@ app.post('/markers', (req, res) => {
     console.log(marker)
     res.sendStatus(200)
   })
+})
+
+app.post('/favorites', (req,res) => {
+  console.log(req.body);
+  console.log(req.body.mapId);
+  // console.log(req.body.userId);
+  console.log(req.session.user_id);
+  res.sendStatus(200);
 })
 
 /* Start */
