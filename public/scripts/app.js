@@ -119,6 +119,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
         //   label: labels[labelIndex++ % labels.length],
         //   animation: google.maps.Animation.DROP
         // });
+
         //here is where the info is relayed in formatted address style
 
         var address = results[0].formatted_address;
