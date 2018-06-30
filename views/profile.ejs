@@ -6,12 +6,24 @@
 
   <div class="half-container-div">
     <h2>Maps</h2>
-    <%= data.profileMaps %>
+    <% data.profileMaps.forEach(function (map) { %>
+      <a href="/maps/<%= map[0] %>">
+        <div class="list-map-item">
+          <h5><%= map[1] %></h5>
+        </div>
+      </a>
+    <% }) %>
   </div>
 
   <div class="half-container-div">
     <h2>Favorites</h2>
-    <%= data.profileFavorites %>
+    <% data.profileFavorites.forEach(function (map) { %>
+      <a href="/maps/<%= map[0] %>">
+        <div class="list-map-item">
+          <h5><%= map[1] %></h5>
+        </div>
+      </a>
+    <% }) %>
   </div>
 
 </div>
@@ -19,7 +31,4 @@
 <% include ./partials/footer %>
 
 </body>
-
 </html>
-
-<!-- Make containers scrollable. -->
