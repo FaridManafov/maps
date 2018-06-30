@@ -30,6 +30,8 @@
 
 </container>
 
+<% if (user.loggedIn === true) { %>
+
 <!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
 <form class="save-and-favorite-forms" id="edited-map-submssion" method="PUT" action="/maps" >
   <input id="save" class="btn btn-primary btn-md" type="submit" value="Save">
@@ -39,6 +41,8 @@
 <form class="save-and-favorite-forms" id="favorite-map-submssion" method="POST" action="/favorites" >
   <input id="favorite" class="btn btn-primary btn-md" type="submit" value="Favorite">
 </form>
+
+<% } %>
 
 <% include ./partials/footer %>
 
