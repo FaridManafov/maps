@@ -215,29 +215,29 @@ app.get('/users/:id', (req, res) => {
     info.name = row[0].username;
     knex('favorites')
     .where({ user_id: user })
+    .join('maps', 'favorites.map_id', '=', 'maps.id')
     .then((row) => {
-      let favoriteMap = row[0].map_id;
+      row.forEach((fav) => {
+        info.favorites.push([fav.map_id, fav.mapname])
+      })
       knex('maps')
-      .where({ id: favoriteMap})
+      .where({ created_by: user })
       .then((row) => {
-        info.favorites.push([favoriteMap, row[0].mapname])
-        knex('maps')
-        .where({ created_by: user }) 
-        .then((row) => {
-          info.maps.push([row[0].id, row[0].mapname])
-          let templateVars = {
-            data: {
-              profile: info.name,
-              profileMaps: info.maps,
-              profileFavorites: info.favorites
-            },
-            user: {
-              userName: req.session.username,
-              loggedIn: req.session.logged_in
-            }
-          }
-          res.render('profile', templateVars);
+        row.forEach((map) => {
+          info.maps.push([map.id, map.mapname])
         })
+        let templateVars = {
+          data: {
+            profile: info.name,
+            profileMaps: info.maps,
+            profileFavorites: info.favorites
+          },
+          user: {
+            userName: req.session.username,
+            loggedIn: req.session.logged_in
+          }
+        }
+        res.render('profile', templateVars);
       })
     })
   })
