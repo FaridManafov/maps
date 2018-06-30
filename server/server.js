@@ -122,8 +122,13 @@ app.post('/logout', (req, res) => {
   res.redirect('/login');
 })
 
-app.get('/users/:id', (req, res) => {
-  res.render('profile');
+app.get('/users/id', (req, res) => {
+  let templateVars =
+      { user:
+           { userName: req.session.username,
+             loggedIn: req.session.logged_in }
+      }
+  res.render('profile', templateVars);
 })
 
 app.get('/maps/id', (req, res) => {
