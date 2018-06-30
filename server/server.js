@@ -193,12 +193,18 @@ app.post('/markers', (req, res) => {
   })
 })
 
-app.post('/favorites', (req,res) => {
-  console.log(req.body);
-  console.log(req.body.mapId);
-  // console.log(req.body.userId);
-  console.log(req.session.user_id);
-  res.sendStatus(200);
+app.post('/favorites', (req, res) => {
+  knex('favorites')
+  .insert( { map_id: req.body.mapId, user_id: req.session.user_id })
+  .then((favorite) => {
+    res.sendStatus(200);
+  })
+})
+
+app.get('/users/:id', (req, res) => {
+
+  knex('users')
+
 })
 
 /* Start */
