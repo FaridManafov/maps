@@ -12,7 +12,7 @@
       <span class="user-ui">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/users/<%=user.userId%>"><%= user.userName %></a>
+            <a class="nav-link" href="/users/<%= user.userId %>"><%= user.userName %></a>
           </li>
         </ul>
         <form action="/logout" method="POST">
