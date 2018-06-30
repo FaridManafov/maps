@@ -31,7 +31,10 @@ function initMap() {
   google.maps.event.addListener(map, "click", function(event) {
     marker = new google.maps.Marker({
       position: event.latLng,
-      map: map
+      map: map,
+      label: labels[labelIndex++ % labels.length],
+      animation: google.maps.Animation.DROP
+
     });
 
     //FETCH lat lng from click
@@ -70,7 +73,7 @@ function submitMarkerPayload(markerArray) {
   $.ajax({
     method: 'POST',
     url: '/maps/markers',
-    data: markerArray
+    data: markerArrayaddress
   }).done(function(){
 
   })
@@ -110,10 +113,12 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
     if (status === 'OK') {
       if (results[0]) {
 
-        var marker = new google.maps.Marker({
-          position: location,
-          map: map
-        });
+        // var marker = new google.maps.Marker({
+        //   position: location,
+        //   map: map,
+        //   label: labels[labelIndex++ % labels.length],
+        //   animation: google.maps.Animation.DROP
+        // });
         //here is where the info is relayed in formatted address style
 
         var address = results[0].formatted_address;

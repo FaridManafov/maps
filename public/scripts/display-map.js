@@ -24,8 +24,36 @@ function initDisplayMap() {
      label: labels[labelIndex++ % labels.length],
      animation: google.maps.Animation.DROP
    });
+   var markerLat = coords[i].latitude;
+   var markerLng = coords[i].longitude;
+   var geocoder = new google.maps.Geocoder;
+   geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
  }
 }
 
+
+function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
+  var location = {lat: lat, lng: lng}
+  geocoder.geocode({'location': location}, function(results, status) {
+    if (status === 'OK') {
+      if (results[0]) {
+        //here is where the info is relayed in formatted address style
+
+        var address = results[0].formatted_address;
+        infowindow.setContent(address);//!!
+        appendStagedMarker(address)
+        console.log(address);
+        //Jquery into the html
+        $('#result-address').text(address)
+
+        infowindow.open(map, marker);
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+  });
+}
 
 console.log("array of aids", )
