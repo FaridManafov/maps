@@ -32,7 +32,8 @@ app.use(cookieSession({
 app.get("/", (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in }
+       loggedIn: req.session.logged_in,
+       userId: req.session.user_id }
   };
   res.render("index", templateVars);
 });
@@ -40,7 +41,8 @@ app.get("/", (req, res) => {
 app.get("/404", (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in }
+       loggedIn: req.session.logged_in,
+       userId: req.session.user_id }
   };
   res.render("error", templateVars)
 });
@@ -49,7 +51,8 @@ app.get("/new", (req, res) => {
   if (req.session.user_id) {
     let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in }
+       loggedIn: req.session.logged_in,
+       userId: req.session.user_id }
   };
   res.render("new_map", templateVars);
   } else {
@@ -60,7 +63,8 @@ app.get("/new", (req, res) => {
 app.get("/register", (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in }
+       loggedIn: req.session.logged_in,
+       userId: req.session.user_id }
   };
   res.render("register", templateVars);
 });
@@ -90,7 +94,8 @@ app.post("/register", (req, res) => {
 app.get('/login', (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in }
+       loggedIn: req.session.logged_in,
+       userId: req.session.user_id }
   };
   res.render('login', templateVars);
 })
@@ -158,7 +163,9 @@ app.get('/maps/:id', (req, res) => {
         let templateVars =
         { user:
              { userName: req.session.username,
-               loggedIn: req.session.logged_in },
+               loggedIn: req.session.logged_in,
+               userId: req.session.user_id
+             },
 
           map: {
             name: map.mapname,
@@ -243,7 +250,8 @@ app.get('/users/:id', (req, res) => {
           },
           user: {
             userName: req.session.username,
-            loggedIn: req.session.logged_in
+            loggedIn: req.session.logged_in,
+            userId: req.session.user_id
           }
         }
         res.render('profile', templateVars);
