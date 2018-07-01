@@ -11,7 +11,7 @@ let stagedMarkers = []
 let mapId = null;
 
 function initMap() {
-  
+  // console.log('knex', knex)
   $(document).ready(function() {
     let markers = JSON.parse($('.markers-hidden').text());
     markers.forEach((element) => {
@@ -24,7 +24,6 @@ function initMap() {
     zoom: 14,
     center: {lat: 43.6446, lng: -79.3950}
   });
-
   var geocoder = new google.maps.Geocoder;
   var infowindow = new google.maps.InfoWindow;
 
@@ -35,6 +34,7 @@ function initMap() {
       map: map,
       label: labels[labelIndex++ % labels.length],
       animation: google.maps.Animation.DROP
+
     });
 
     //FETCH lat lng from click
@@ -50,11 +50,7 @@ function initMap() {
 
     geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
 
-      //click listener on the marker that opens a window info on the marker
-    // google.maps.event.addListener(marker, "click", function() {
-    //   infowindow.open(map, marker);
-    // });
-    google.maps.event.addListener(marker, 'click', function(event) {
+      google.maps.event.addListener(marker, 'click', function(event) {
       remove(stagedMarkers, marker)
       this.setMap(null);
      });
@@ -63,22 +59,10 @@ function initMap() {
       const index = array.indexOf(element);
       array.splice(index, 1);
     }
+
   });
 }
 
-// marker.addListener("dblclick", function() {
-//   marker.setMap(null);
-// });
-
-// function createMarker(lat, lng, title) {
-//   var marker = new google.maps.Marker({
-//       position: new google.maps.LatLng(lat, lng),
-//       title: title,
-//       map: map
-//   });
-
-
-// }
 // function loadMarkerPayload(){
 
 //   $.ajax({
@@ -225,18 +209,14 @@ $("#favorite-map-submssion").on("submit", function (event) {
   event.preventDefault();
 
     let mapId = $('.map-info-hidden').text();
-    // let userId = req.session.user_id;
-    // console.log(Number(mapId));
-
 
     $.ajax({
     method: "POST",
     url: "/favorites",
-    data: {mapId: Number(mapId)}
-  }).done(function(data, status) {
+    data: { mapId: Number(mapId) }
+    }).done(function(data, status) {
     console.log("Data from pushing 'favorite' button: ", data, "\nStatus: ", status)
   })
-
 });
 
 
