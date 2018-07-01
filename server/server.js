@@ -188,11 +188,17 @@ app.post('/markers', (req, res) => {
 })
 
 app.post('/favorites', (req, res) => {
-  let mapId = req.body.id;
-  knex('favorites')
-  .insert( { map_id: mapId, user_id: req.session.user_id })
-  .then((favorite) => {
-    res.sendStatus(200);
+  let mapId = req.body.mapId;
+  knex('maps')
+  .where({ id: mapId })
+  .then((map) => {
+    let name = map[0].mapname;
+    console.log(name);
+    knex('favorites')
+    .insert( { map_id: mapId, user_id: req.session.user_id })
+    .then((favorite) => {
+      console.log(favorite);
+    })
   })
 })
 
