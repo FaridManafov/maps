@@ -3,10 +3,12 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   margin-left: 1rem;
+  font-size: 55px;
 }
 
 .half-container-div {
   display: inline-grid;
+  margin-top: 40px;
   width: 45%;
   max-height: 30rem;
   margin-left: 1rem;
@@ -22,10 +24,22 @@
 
   .list-map-item {
     height: 100px;
-    background-color: #eee;
+    background-color: #eaf2ff;
     margin-bottom: 8px;
-    padding-top: 14px;
-    padding-left: 8px;
+    display: flex;
+    justify-content: space-around;
+
+    h5 {
+      padding-top: 40px;
+    }
+  }
+
+  a {
+    :hover {
+      background-color: #eaf2aa;
+    }
+
+    padding-top: 10px;
   }
 
 
