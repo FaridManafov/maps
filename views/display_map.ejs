@@ -1,55 +1,41 @@
 <% include ./partials/header %>
 <h1 class="leftAlignedHeading">User's Map</h1>
-
 <container class="mapAndMapInfo">
-
   <!-- Creating a new map with one draggable pin that defaults to showing Toronto. -->
   <div id="map"></div>
-
   <!-- List of markers that user has created on this map. -->
   <div class="listOfMarkers">
     <h2>Locations</h2>
     <ul id="displayMapMarkers" class="list-group"></ul>
   </div>
-  
   <h1>
     <%= map.name %>
     <%= map.createdBy %>
   </h1>
-
   <!-- target markers-hidden with jquery and parse the json -->
   <div class="markers-hidden">
     <%= JSON.stringify(map.markers) %>
   </div>
   <div class="map-info-hidden">
-    <!-- <%= map.id %> -->
+    <%= map.id %>
   </div>
-
 </container>
-
 <% if (user.loggedIn === true) { %>
-
 <!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
 <form class="save-and-favorite-forms" id="edited-map-submssion" method="PUT" action="/maps" >
   <input id="save" class="btn btn-primary btn-md" type="submit" value="Save">
 </form>
-
 <!-- FAVORITE BUTTON THAT SHOULD POST TO USERS TABLE IN DATABASE -->
 <form class="save-and-favorite-forms" id="favorite-map-submssion" method="POST" action="/favorites" >
   <input id="favorite" class="btn btn-primary btn-md" type="submit" value="Favorite">
 </form>
-
 <% } %>
-
 <% include ./partials/footer %>
-
 <!-- EDITABLE MAP -->
 <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initMap">
 </script> -->
-
 <!-- UN-EDITABLE MAP -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initDisplayMap">
 </script>
-
 </body>
 </html>
