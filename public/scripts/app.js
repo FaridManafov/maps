@@ -11,7 +11,7 @@ let stagedMarkers = []
 let mapId = null;
 
 function initMap() {
-  
+
   $(document).ready(function() {
     let markers = JSON.parse($('.markers-hidden').text());
     markers.forEach((element) => {
@@ -33,7 +33,6 @@ function initMap() {
     marker = new google.maps.Marker({
       position: event.latLng,
       map: map,
-      label: labels[labelIndex++ % labels.length],
       animation: google.maps.Animation.DROP
     });
 
