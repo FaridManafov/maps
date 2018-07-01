@@ -20,13 +20,28 @@
     text-align: center;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .list-map-item {
     height: 100px;
     background-color: #eee;
     margin-bottom: 8px;
     padding-top: 14px;
-    padding-left: 8px;
+
+    h5 {
+      color: black;
+      text-align: center;
+      margin-top: 1.2rem;
+    }
   }
 
+  .list-map-item:hover {
+    background-color: #AED8E5;
+  }
 
+  .list-map-item:hover h5 {
+    color: #256174;
+  }
 }
