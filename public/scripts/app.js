@@ -90,9 +90,9 @@ function submitMarkerPayload(markerArray) {
 // Then I want to re render the marker list of the right
 
 
-//Function that populates list items on new_map and display_map pages using content from database.
+
 function appendStagedMarker(location) {
-  let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
+  let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`;
   $("#newMapMarkers").append(listItem);
 }
 
@@ -127,13 +127,10 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
         //here is where the info is relayed in formatted address style
 
         var address = results[0].formatted_address;
-        infowindow.setContent(address);
         appendStagedMarker(address)
         console.log(address);
         //Jquery into the html
         $('#result-address').text(address)
-
-        infowindow.open(map, marker);
       } else {
         window.alert('No results found');
       }
