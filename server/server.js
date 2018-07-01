@@ -150,19 +150,27 @@ app.get('/maps/:id', (req, res) => {
     knex('markers')
     .where({ map_id: map.id })
     .then((markers) => {
-      let templateVars =
-      { user:
-           { userName: req.session.username,
-             loggedIn: req.session.logged_in },
 
-        map: {
-          name: map.mapname,
-          id: map.id,
-          createdBy: map.created_by,
-          markers: markers
+      knex('users')
+      .where( {id: map.created_by} )
+      .then((id) => {
+
+        let templateVars =
+        { user:
+             { userName: req.session.username,
+               loggedIn: req.session.logged_in },
+
+          map: {
+            name: map.mapname,
+            id: map.id,
+            createdBy: map.created_by,
+            markers: markers,
+            createdByUsername: id[0].username
+          }
         }
-      }
-      res.render('display_map', templateVars);
+        res.render('display_map', templateVars);
+      })
+
     })
   })
 })
