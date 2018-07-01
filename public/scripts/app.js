@@ -199,24 +199,24 @@ $("#new-map-submission").on("submit", function (event) {
 //   })
 // })
 
-// SUBMITTING MAP TO A USER'S FAVORITES WITH 'FAVORITE' BUTTON ON '/MAPS/:ID' (WORK IN PROGRESS)
-$("#favorite-map-submssion").on("submit", function (event) {
-  event.preventDefault();
-
-    let mapId = $('.map-info-hidden').text();
-    // let userId = req.session.user_id;
-    // console.log(Number(mapId));
-
-
-    $.ajax({
-    method: "POST",
-    url: "/favorites",
-    data: {mapId: Number(mapId)}
-  }).done(function(data, status) {
-    console.log("Data from pushing 'favorite' button: ", data, "\nStatus: ", status)
-  })
-
-});
+// // SUBMITTING MAP TO A USER'S FAVORITES WITH 'FAVORITE' BUTTON ON '/MAPS/:ID' (WORK IN PROGRESS)
+// $("#favorite-map-submssion").on("submit", function (event) {
+//   event.preventDefault();
+//
+//     let mapId = $('.map-info-hidden').text();
+//     // let userId = req.session.user_id;
+//     // console.log(Number(mapId));
+//
+//
+//     $.ajax({
+//     method: "POST",
+//     url: "/favorites",
+//     data: {mapId: Number(mapId)}
+//   }).done(function(data, status) {
+//     console.log("Data from pushing 'favorite' button: ", data, "\nStatus: ", status)
+//   })
+//
+// });
 
 
   //callback

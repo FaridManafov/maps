@@ -32,8 +32,7 @@ app.use(cookieSession({
 app.get("/", (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in,
-       userId: req.session.user_id }
+       loggedIn: req.session.logged_in }
   };
   res.render("index", templateVars);
 });
@@ -41,8 +40,7 @@ app.get("/", (req, res) => {
 app.get("/404", (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in,
-       userId: req.session.user_id }
+       loggedIn: req.session.logged_in }
   };
   res.render("error", templateVars)
 });
@@ -51,8 +49,7 @@ app.get("/new", (req, res) => {
   if (req.session.user_id) {
     let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in,
-       userId: req.session.user_id }
+       loggedIn: req.session.logged_in }
   };
   res.render("new_map", templateVars);
   } else {
@@ -63,8 +60,7 @@ app.get("/new", (req, res) => {
 app.get("/register", (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in,
-       userId: req.session.user_id }
+       loggedIn: req.session.logged_in }
   };
   res.render("register", templateVars);
 });
@@ -94,8 +90,7 @@ app.post("/register", (req, res) => {
 app.get('/login', (req, res) => {
   let templateVars = { user:
      { userName: req.session.username,
-       loggedIn: req.session.logged_in,
-       userId: req.session.user_id }
+       loggedIn: req.session.logged_in }
   };
   res.render('login', templateVars);
 })
@@ -128,25 +123,11 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
   req.session = null;
-  res.redirect('/');
-})
-
-app.get('/users/id', (req, res) => {
-  let templateVars =
-      { user:
-           { userName: req.session.username,
-             loggedIn: req.session.logged_in,
-             userId: req.session.user_id }
-      }
-  res.render('profile', templateVars);
-})
-
-app.get('/maps/id', (req, res) => {
-  res.render('display_map');
+  res.redirect('/login');
 })
 
 app.post('/maps', (req, res) => {
-  let mapName = req.body.name;
+  let mapName = req.body.mapName;
   let user = req.session.user_id;
 
   knex('maps')
@@ -172,8 +153,7 @@ app.get('/maps/:id', (req, res) => {
       let templateVars =
       { user:
            { userName: req.session.username,
-             loggedIn: req.session.logged_in,
-             userId: req.session.user_id },
+             loggedIn: req.session.logged_in },
 
         map: {
           name: map.mapname,
@@ -186,6 +166,12 @@ app.get('/maps/:id', (req, res) => {
     })
   })
 })
+
+app.post('maps/:id/edit', (req, res) => {
+
+})
+
+
 
 app.post('/markers', (req, res) => {
   console.log(req.body);
@@ -202,8 +188,9 @@ app.post('/markers', (req, res) => {
 })
 
 app.post('/favorites', (req, res) => {
+  let mapId = req.body.id;
   knex('favorites')
-  .insert( { map_id: req.body.mapId, user_id: req.session.user_id })
+  .insert( { map_id: mapId, user_id: req.session.user_id })
   .then((favorite) => {
     res.sendStatus(200);
   })
@@ -242,8 +229,7 @@ app.get('/users/:id', (req, res) => {
           },
           user: {
             userName: req.session.username,
-            loggedIn: req.session.logged_in,
-            userId: req.session.user_id
+            loggedIn: req.session.logged_in
           }
         }
         res.render('profile', templateVars);
