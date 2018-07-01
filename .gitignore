@@ -1,3 +1,5 @@
 node_modules
 settings.json
 ./public/main.css
+main.css
+public/main.css
