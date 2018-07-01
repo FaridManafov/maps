@@ -204,6 +204,7 @@ app.post('/markers', (req, res) => {
 
 app.post('/favorites', (req, res) => {
   let mapId = req.body.mapId;
+  console.log("mapId: ", mapId);
   knex('maps')
   .where({ id: mapId })
   .then((map) => {

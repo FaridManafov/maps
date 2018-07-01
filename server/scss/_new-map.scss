@@ -1,6 +1,11 @@
+.map-info-hidden {
+  display: none;
+}
+
 .page-header {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  margin-left: 0.9rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
 
@@ -55,10 +60,19 @@
   display: inline-block;
 }
 
-#save {
-  margin: 1rem;
+.mapName {
+  width: 25%;
+  padding: 0.3rem;
+  margin: 0.9rem 0 0 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #6666;
 }
 
-#favorite {
-  margin: 1rem;
+form.save-and-favorite-forms input {
+  margin: 1rem 0 0 0.9rem;
 }
+
+form#new-map-submission input#save {
+  margin: 0rem 0 0 0.25rem;
+}
+
