@@ -1,11 +1,10 @@
 <% include ./partials/header %>
 
-<div class="page-header">
-  <h2>
-    <%= map.name %>
-    <small class="created-by">created by <%= map.createdByUsername %></small>
-  </h2>
-</div>
+<h2 class="page-header">
+  <%= map.name %>
+  <small class="created-by">created by <%= map.createdByUsername %></small>
+</h2>
+
 
 <container class="mapAndMapInfo">
   <!-- Creating a new map with one draggable pin that defaults to showing Toronto. -->
