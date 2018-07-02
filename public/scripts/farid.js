@@ -45,13 +45,13 @@ function initDisplayMap() {
 
     });
 
-    var markerLat = marker.getPosition().lat();
-    var markerLng = marker.getPosition().lng();
-    arrayOfMarkers.push({markerLat, markerLng});
+    var latitude = marker.getPosition().lat();
+    var longitude = marker.getPosition().lng();
+    arrayOfMarkers.push({latitude, longitude});
     console.log("staged:", arrayOfMarkers)
 
 
-    geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
+    geocodeLatLng(geocoder, map, infowindow, latitude, longitude);
 
     google.maps.event.addListener(marker, 'click', function(event) {
     remove(arrayOfMarkers, marker)
