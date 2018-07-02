@@ -21,7 +21,7 @@ function initMap() {
   });
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
+    zoom: 12,
     center: {lat: 43.6446, lng: -79.3950}
   });
   var geocoder = new google.maps.Geocoder;
@@ -254,7 +254,7 @@ $("#favorite-map-submssion").on("submit", function (event) {
       // function initMap() {
       //   map = new google.maps.Map(
       //     document.getElementById('map'), {
-      //       zoom: 14,
+      //       zoom: 12,
       //       center: toronto,
       //   });
 
