@@ -11,7 +11,7 @@ markers.forEach((element) => {
 
 function initDisplayMap() {
  map = new google.maps.Map(document.getElementById('map'), {
-   zoom: 10,
+   zoom: 14,
    center: new google.maps.LatLng(arrayOfMarkers[0].latitude, arrayOfMarkers[0].longitude)
  });
 
