@@ -1,0 +1,38 @@
+<% include ./partials/header %>
+<h1 class="leftAlignedHeading"><%= map.createdByUsername %></h1>
+<container class="mapAndMapInfo">
+  <!-- Creating a new map with one draggable pin that defaults to showing Toronto. -->
+  <div id="map"></div>
+  <!-- List of markers that user has created on this map. -->
+  <div class="listOfMarkers">
+    <h2>Locations</h2>
+    <ul id="displayMapMarkers" class="list-group"></ul>
+  </div>
+  <h1>
+    <%= map.name %>
+    <%= map.createdBy %>
+  </h1>
+  <!-- target markers-hidden with jquery and parse the json -->
+  <div class="markers-hidden">
+    <%= JSON.stringify(map.markers) %>
+  </div>
+  <div class="map-info-hidden">
+    <%= map.id %>
+  </div>
+</container>
+<% if (user.loggedIn === true) { %>
+<!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
+<button id="save-edit" class="btn btn-info">Save</button>
+<!-- FAVORITE BUTTON THAT SHOULD POST TO USERS TABLE IN DATABASE -->
+<% } %>
+<% include ./partials/footer %>
+
+<!-- EDITABLE MAP -->
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp9oIxlme2HBgjPa_7qHipN7CEeWxeeZo&callback=initMap">
+</script> -->
+<!-- UN-EDITABLE MAP -->
+<script type="text/javascript" src="/scripts/edit-map.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp9oIxlme2HBgjPa_7qHipN7CEeWxeeZo&callback=initDisplayMap">
+</script>
+</body>
+</html>
