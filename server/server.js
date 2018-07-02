@@ -196,7 +196,6 @@ app.get('/maps/:id/edit', (req, res) => {
       knex('users')
       .where( {id: map.created_by} )
       .then((id) => {
-
         let templateVars =
         { user:
              { userName: req.session.username,
@@ -214,10 +213,22 @@ app.get('/maps/:id/edit', (req, res) => {
         }
         res.render('edit_map', templateVars);
       })
-
     })
   })
 })
+
+app.post('/maps/:id/edit', (req, res) => {
+  let map = req.params.id;
+  let lat = req.body.markerLat;
+  let long = req.body.markerLng;
+
+  knex('markers')
+  .where( { map_id: map } )
+  .del()
+  .then((row) => {
+    console.log(row[0]);
+  })
+});
 
 
 
