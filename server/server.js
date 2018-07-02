@@ -218,19 +218,14 @@ app.get('/maps/:id/edit', (req, res) => {
 })
 
 app.post('/maps/:id/edit', (req, res) => {
-  let map = req.params.id;
-  let lat = req.body.markerLat;
-  let long = req.body.markerLng;
-
+  let lat = req.body.lat;
+  let long = req.body.long;
   knex('markers')
-  .where( { map_id: map } )
-  .del()
+  .insert({map_id: req.params.id, latitude: lat, longitude: long})
   .then((row) => {
-    console.log(row[0]);
+    res.redirect("/maps/" + req.params.id)
   })
-});
-
-
+})
 
 app.post('/markers', (req, res) => {
   console.log(req.body);

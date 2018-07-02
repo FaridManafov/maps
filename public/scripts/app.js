@@ -1,6 +1,5 @@
 // const knexConfig = require('../../server/knexfile.js')
 // const knex = require('knex')(knexConfig.development);
-
 var map;
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
@@ -36,16 +35,11 @@ function initMap() {
 
     });
 
-    //FETCH lat lng from click
     var markerLat = marker.getPosition().lat();
     var markerLng = marker.getPosition().lng();
     stagedMarkers.push({markerLat, markerLng});
     console.log("staged:", stagedMarkers)
 
-
-    //THIS HAS THE LAT LONG DATA CONSOLE LOGGED, SEND THIS TO THE COLLECTION
-    console.log(markerLat)
-    console.log(markerLng)
 
     geocodeLatLng(geocoder, map, infowindow, markerLat, markerLng);
 
@@ -59,7 +53,7 @@ function initMap() {
       array.splice(index, 1);
     }
 
-  });
+  })
 }
 
 // function loadMarkerPayload(){

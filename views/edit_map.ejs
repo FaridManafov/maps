@@ -22,9 +22,7 @@
 </container>
 <% if (user.loggedIn === true) { %>
 <!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
-<form class="save-and-favorite-forms" id="edited-map-submssion" method="POST" action="/maps/<%= map.id %>/edit">
-  <input id="save" class="btn btn-primary btn-md" type="submit" value="Save">
-</form>
+<button id="save-edit" class="btn btn-info">Save</button>
 <!-- FAVORITE BUTTON THAT SHOULD POST TO USERS TABLE IN DATABASE -->
 <% } %>
 <% include ./partials/footer %>
@@ -34,7 +32,7 @@
 </script> -->
 <!-- UN-EDITABLE MAP -->
 <script type="text/javascript" src="/scripts/farid.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initDisplayMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp9oIxlme2HBgjPa_7qHipN7CEeWxeeZo&callback=initDisplayMap">
 </script>
 </body>
 </html>

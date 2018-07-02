@@ -1,8 +1,25 @@
 var map;
-let arrayOfMarkers = []
+let arrayOfMarkers = [];
+let pageMarkers = [];
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
 
+$(document).ready(function() {
+  $('#save-edit').on('click', function(e){
+    arrayOfMarkers.forEach((marker) => {
+      let whichMap = marker.map_id;
+      $.ajax({
+        method: "POST",
+        url: "/maps/" + whichMap + "/edit",
+        data: {
+          mapId: marker.map_id,
+          lat: marker.latitude,
+          long: marker.longitude
+        }
+      })
+    })
+  })
+})
 
 function initDisplayMap() {
   function remove(array, element) {
@@ -90,6 +107,7 @@ function appendMarkers(location) {
   let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
   $(".listOfMarkers").append(listItem);
 }
+
 
 
 
