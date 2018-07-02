@@ -133,7 +133,7 @@ app.post('/logout', (req, res) => {
 
 app.post('/maps', (req, res) => {
   let mapName = req.body.mapName;
-  let user = req.session.user_id;
+  let user = req.session.user_id[0];
 
   knex('maps')
   .insert({ mapname: mapName, created_by: user  })
@@ -211,7 +211,7 @@ app.post('/favorites', (req, res) => {
     let name = map[0].mapname;
     console.log(name);
     knex('favorites')
-    .insert( { map_id: mapId, user_id: req.session.user_id })
+    .insert( { map_id: mapId, user_id: req.session.user_id[0] })
     .then((favorite) => {
       console.log(favorite);
     })
