@@ -4,11 +4,11 @@ MyMaps is a full stack web application built with Express, Bootstrap, and Knex. 
 
 ## Final Product
 
-!["Screenshot of homepage."]()
-!["Screenshot of a user's map."]()
-!["Screenshot 1/2 of functions that initialize maps using the Google Maps API."]()
-!["Screenshot 2/2 of functions that initialize maps using the Google Maps API."]()
-!["Screenshot of POST route for the registration page."]()
+!["Screenshot of homepage."](https://github.com/jonathandannel/maps/blob/master/docs/google-maps-api-1.png?raw=true)
+!["Screenshot of a user's map."](https://github.com/jonathandannel/maps/blob/master/docs/google-maps-api-2.png?raw=true)
+!["Screenshot 1/2 of functions that initialize maps using the Google Maps API."](https://github.com/jonathandannel/maps/blob/master/docs/homepage.png?raw=true)
+!["Screenshot 2/2 of functions that initialize maps using the Google Maps API."](https://github.com/jonathandannel/maps/blob/master/docs/map.png?raw=true)
+!["Screenshot of POST route for the registration page."](https://github.com/jonathandannel/maps/blob/master/docs/register-post-route.png?raw=true)
 
 ## Dependencies
 
