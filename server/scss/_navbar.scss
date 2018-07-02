@@ -7,6 +7,18 @@
   .user-ui {
     display: flex;
     flex-direction: row;
+
+    .nav-link {
+      color: #1E8495;
+      font-weight: 500;
+      font-size: x-large;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .nav-link:hover {
+      color: #114b55;
+    }
   }
 }
 
