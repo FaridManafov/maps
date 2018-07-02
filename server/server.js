@@ -182,8 +182,41 @@ app.get('/maps/:id', (req, res) => {
   })
 })
 
-app.post('maps/:id/edit', (req, res) => {
+app.get('/maps/:id/edit', (req, res) => {
+  let map = req.params.id;
+  knex('maps')
+  .where({ id: map })
+  .then((rows) => {
+    let map = rows[0];
+    console.log(rows, map);
+    knex('markers')
+    .where({ map_id: map.id })
+    .then((markers) => {
 
+      knex('users')
+      .where( {id: map.created_by} )
+      .then((id) => {
+
+        let templateVars =
+        { user:
+             { userName: req.session.username,
+               loggedIn: req.session.logged_in,
+               userId: req.session.user_id
+             },
+
+          map: {
+            name: map.mapname,
+            id: map.id,
+            createdBy: map.created_by,
+            markers: markers,
+            createdByUsername: id[0].username
+          }
+        }
+        res.render('edit_map', templateVars);
+      })
+
+    })
+  })
 })
 
 
