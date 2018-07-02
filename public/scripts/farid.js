@@ -69,7 +69,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
       if (results[0]) {
         //here is where the info is relayed in formatted address style
         var address = results[0].formatted_address;
-        appendStagedMarker(address);
+        appendMarkers(address);
         // infowindow.setContent(address);//disabled as this is the infowindow bubble on marker that doesnt exist
 
         console.log(address);
@@ -86,6 +86,10 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
   });
 }
 
+function appendMarkers(location) {
+  let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
+  $(".listOfMarkers").append(listItem);
+}
 
 
 
