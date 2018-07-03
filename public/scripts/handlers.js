@@ -39,7 +39,6 @@ $(document).ready(function() {
     }
 
     if (errors.length !== 0) {
-      console.log(errors);
       $('#error-field').empty();
       e.preventDefault();
 

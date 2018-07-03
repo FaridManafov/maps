@@ -7,7 +7,6 @@ var labelIndex = 0;
 $(document).ready(function() {
   $('#save-edit').on('click', function(e){
     arrayOfMarkers.forEach((marker) => {
-      console.log(marker.map_id);
       let whichMap = marker.map_id;
       $.ajax({
         method: "POST",
@@ -66,7 +65,6 @@ function initDisplayMap() {
     var latitude = marker.getPosition().lat();
     var longitude = marker.getPosition().lng();
     arrayOfMarkers.push({latitude, longitude});
-    console.log("staged:", arrayOfMarkers)
 
 
     geocodeLatLng(geocoder, map, infowindow, latitude, longitude);
@@ -90,7 +88,6 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
         appendMarkers(address);
         // infowindow.setContent(address);//disabled as this is the infowindow bubble on marker that doesnt exist
 
-        console.log(address);
         //Jquery into the html
         $('#result-address').text(address)
 

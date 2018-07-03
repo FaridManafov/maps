@@ -24,8 +24,8 @@ exports.seed = function(knex, Promise) {
 
   function createUsers() {
     const salt = bcrypt.genSaltSync(10);
-    const password1 = bcrypt.hashSync("theresa", salt) // -> "asdfasdf"
-    const password2 = bcrypt.hashSync("farid", salt) // -> "asdfasdf"
+    const password1 = bcrypt.hashSync("theresa", salt)
+    const password2 = bcrypt.hashSync("farid", salt)
     const password3 = bcrypt.hashSync("jonathan", salt)
 
     return knex('users').insert([

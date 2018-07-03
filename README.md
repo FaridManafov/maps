@@ -31,3 +31,7 @@ MyMaps is a full stack web application built with Express, Bootstrap, and Knex. 
 
 - Install all dependencies (using the `npm install` command in the terminal).
 - Run the development web server using the `npm start` command in the terminal. The project runs on localhost:3000.
+
+## Known Issues
+- We aimed to make the saved maps editable, but fell short of that goal in the time that we had.
+- Users who are created through registration, not through seeding the database, can't log back in after they log out. At this point in time, we don't know what makes them behave differently than the seeded users.

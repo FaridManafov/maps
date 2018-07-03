@@ -26,24 +26,21 @@
     <%= JSON.stringify(map.markers) %>
   </div>
 </container>
+
 <% if (user.loggedIn === true) { %>
-  <!-- SAVE BUTTON THAT SHOULD EDIT EXISTING ENTRIES IN DATABASE  -->
+  <!-- SAVE BUTTON THAT EDITS EXISTING ENTRIES IN DATABASE  -->
   <form class="save-and-favorite-forms" id="edited-map-submssion" method="PUT" action="/maps" >
     <input id="save" class="btn btn-outline-info btn-md" type="submit" value="Save">
   </form>
-  <!-- FAVORITE BUTTON THAT SHOULD POST TO USERS TABLE IN DATABASE -->
+  <!-- FAVORITE BUTTON THAT POSTS TO USERS TABLE IN DATABASE -->
   <form class="save-and-favorite-forms" id="favorite-map-submssion" method="POST" action="/favorites" >
     <input id="favorite" class="btn btn-outline-info btn-md" type="submit" value="Favorite">
   </form>
 <% } %>
 <% include ./partials/footer %>
 
-<!-- EDITABLE MAP -->
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initMap">
-</script> -->
-<!-- UN-EDITABLE MAP -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB8Rzd9fg-Ef8JwpUWcyz9jCdXRSqJWCM&callback=initDisplayMap">
 </script>
-  <script type="text/javascript" src="/scripts/display-map.js"></script>
+<script type="text/javascript" src="/scripts/display-map.js"></script>
 </body>
 </html>

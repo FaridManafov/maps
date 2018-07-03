@@ -15,8 +15,6 @@ function initMap() {
   $(document).ready(function() {
     let markers = JSON.parse($('.markers-hidden').text());
     markers.forEach((element) => {
-      console.log(element.latitude);
-      console.log(element.longitude);
     })
   });
 
@@ -87,7 +85,6 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
 
         var address = results[0].formatted_address;
         appendStagedMarker(address)
-        console.log(address);
         //Jquery into the html
         $('#result-address').text(address)
       } else {
@@ -98,6 +95,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
     }
   });
 }
+
 //SUBMITTING WITH 'SAVE' BUTTON ON '/NEW'
 $("#new-map-submission").on("submit", function (event) {
 
@@ -116,7 +114,6 @@ $("#new-map-submission").on("submit", function (event) {
     url: "/maps",
     data: {mapName: mapName}
   }).done(function(data) {
-    console.log(data);
     mapId = data.id;
 
     stagedMarkers.forEach(function(marker) {
@@ -144,6 +141,5 @@ $("#favorite-map-submssion").on("submit", function (event) {
     url: "/favorites",
     data: { mapId: Number(mapId) }
     }).done(function(data, status) {
-    console.log("Data from pushing 'favorite' button: ", data, "\nStatus: ", status)
   })
 });

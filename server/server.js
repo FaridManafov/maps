@@ -107,7 +107,6 @@ app.post('/login', (req, res) => {
   knex('users')
   .where({ username: username })
   .then((data) => {
-    console.log(data[0]);
     if (data.length <= 0) {
       res.redirect("/register");
       return;
@@ -117,7 +116,6 @@ app.post('/login', (req, res) => {
         req.session.user_id = data[0].id;
         req.session.username = data[0].username;
         req.session.logged_in = true;
-        console.log('successful login ' + req.body);
         res.redirect("/")
       } else {
         res.redirect('login');
@@ -151,7 +149,6 @@ app.get('/maps/:id', (req, res) => {
   .where({ id: map })
   .then((rows) => {
     let map = rows[0];
-    console.log(rows, map);
     knex('markers')
     .where({ map_id: map.id })
     .then((markers) => {
@@ -182,14 +179,7 @@ app.get('/maps/:id', (req, res) => {
   })
 })
 
-app.post('maps/:id/edit', (req, res) => {
-
-})
-
-
-
 app.post('/markers', (req, res) => {
-  console.log(req.body);
   let map = req.body.mapId;
   let lat = req.body.markerLat;
   let long = req.body.markerLng;
@@ -197,23 +187,19 @@ app.post('/markers', (req, res) => {
   knex('markers')
   .insert({ map_id: map, latitude: lat, longitude: long })
   .then((marker) => {
-    console.log(marker)
     res.sendStatus(200)
   })
 })
 
 app.post('/favorites', (req, res) => {
   let mapId = req.body.mapId;
-  console.log("mapId: ", mapId);
   knex('maps')
   .where({ id: mapId })
   .then((map) => {
     let name = map[0].mapname;
-    console.log(name);
     knex('favorites')
     .insert( { map_id: mapId, user_id: req.session.user_id[0] })
     .then((favorite) => {
-      console.log(favorite);
     })
   })
 })

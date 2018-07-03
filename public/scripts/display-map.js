@@ -6,7 +6,6 @@ var labelIndex = 0;
 let markers = JSON.parse($('.markers-hidden').text());
 markers.forEach((element) => {
  arrayOfMarkers.push(element)
- console.log("element",element)
 })
 
 function initDisplayMap() {
@@ -43,7 +42,6 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
         appendStagedMarker(address);
         // infowindow.setContent(address);//disabled as this is the infowindow bubble on marker that doesnt exist
 
-        console.log(address);
         //Jquery into the html
         $('#result-address').text(address)
 
@@ -61,4 +59,3 @@ function appendStagedMarker(location) {
   let listItem = `<li class="list-group-item list-group-item-action">${location}</li>`
   $("#displayMapMarkers").append(listItem);
 }
-console.log("array of aids", )
